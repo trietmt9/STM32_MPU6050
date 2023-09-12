@@ -21,7 +21,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <mpu6050.h>
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -32,7 +31,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define MPU6050_Address         0xD0
+#define WHO_AM_I                0x75
+#define SMPRT_DIV               0x19
+#define GYRO_CONFIG             0x1B
+#define GYRO_XOUT               0x43
+#define ACCEL_CONFIG            0x1C
+#define ACCEL_XOUT              0x3B
+#define PWR_MGMT_1              0x6B
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -46,11 +52,26 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-mpu6050_t MPU6050;
 char Roll_Data[30];
 char Pitch_Data[30];
 char Yaw_Data[30];
-int set_gyro_angles;
+
+float Gx;
+float Gy;
+float Gz;
+
+float Ax;
+float Ay;
+float Az;
+
+int16_t Gx_RAW;
+int16_t Gy_RAW;
+int16_t Gz_RAW;
+
+int16_t Ax_RAW;
+int16_t Ay_RAW;
+int16_t Az_RAW;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,7 +85,53 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void MPU6050_Init()
+{
+    uint8_t check; 
+    uint8_t Data;
 
+    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), WHO_AM_I, 1, &check, 1,100);
+    if(check == MPU6050_Address)
+    {
+        Data = 0;
+        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), PWR_MGMT_1, 1, &Data, 1, 100);
+
+        Data = 0x07;
+        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), SMPRT_DIV, 1, &Data, 1, 100);
+
+        Data = 0x0;
+        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), ACCEL_CONFIG, 1,&Data, 1, 100);
+
+        Data = 0x0;
+        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), GYRO_CONFIG, 1,&Data, 1, 100);
+    }
+}
+
+void MPU6050_Read()
+{
+    uint8_t Accel_Data[6];
+    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Accel_Data, 6, 100);
+    Ax_RAW =(int16_t) (Accel_Data[0] <<8 | Accel_Data[1]);
+    Ay_RAW =(int16_t) (Accel_Data[2] <<8 | Accel_Data[3]);
+    Az_RAW =(int16_t) (Accel_Data[4] <<8 | Accel_Data[5]);
+ 
+    Ax = Ax_RAW/4096.0;
+    Ay = Ay_RAW/4096.0;
+    Az = Az_RAW/4096.0;
+}
+
+void MPU6050_Read_Gyro()
+{
+    uint8_t Gyro_Data[6];
+    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Gyro_Data, 6, 100);
+    Gx_RAW =(int16_t) (Gyro_Data[0] << 8 | Gyro_Data[1]);
+    Gy_RAW =(int16_t) (Gyro_Data[2] << 8 | Gyro_Data[3]);
+    Gz_RAW =(int16_t) (Gyro_Data[4] << 8 | Gyro_Data[5]);
+
+    Gx = Gx_RAW/65.5;
+    Gy = Gy_RAW/65.5;
+    Gz = Gz_RAW/65.5;
+}
 /* USER CODE END 0 */
 
 /**
@@ -99,18 +166,6 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   MPU6050_Init();
-
-  for(int calibrate = 0; calibrate < 2000; calibrate++)
-  {
-    MPU6050_Read(&MPU6050);
-    MPU6050.Cali_Gx += MPU6050.Gx;
-    MPU6050.Cali_Gy += MPU6050.Gy;
-    MPU6050.Cali_Gz += MPU6050.Gz;
-    HAL_Delay(3);
-  }
-  MPU6050.Cali_Gx/=2000;
-  MPU6050.Cali_Gy/=2000;
-  MPU6050.Cali_Gz/=2000;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -120,41 +175,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    MPU6050_Read(&MPU6050);
-    MPU6050.Gx -= MPU6050.Cali_Gx;
-    MPU6050.Gy -= MPU6050.Cali_Gy;
-    MPU6050.Gz -= MPU6050.Cali_Gz;
-
-    MPU6050.Pitch_Angle += MPU6050.Gx * 0.0000611; 
-    MPU6050.Roll_Angle += MPU6050.Gy * 0.0000611; 
-
-    MPU6050.Pitch_Angle+= MPU6050.Roll_Angle*sin(MPU6050.Gz*0.000001066);
-    MPU6050.Roll_Angle-= MPU6050.Pitch_Angle*sin(MPU6050.Gz*0.000001066);
-
-    MPU6050.Total_Acc_Vector = sqrt(pow(MPU6050.Ax,2) + pow(MPU6050.Ay,2) + pow(MPU6050.Az,2));
-    MPU6050.Roll_Angle_Acc = asin((float)MPU6050.Ax/MPU6050.Total_Acc_Vector) * 57.296;
-    MPU6050.Pitch_Angle_Acc = asin((float)MPU6050.Ay/MPU6050.Total_Acc_Vector) * -57.296;
-
-    if(set_gyro_angles)
-    {
-      MPU6050.Roll_Angle = MPU6050.Roll_Angle *0.9996 - MPU6050.Roll_Angle_Acc*0.0004;
-      MPU6050.Pitch_Angle = MPU6050.Pitch_Angle *0.9996 - MPU6050.Pitch_Angle_Acc*0.0004;
-    }
-    else 
-    {
-      MPU6050.Roll_Angle = MPU6050.Roll_Angle_Acc;
-      MPU6050.Pitch_Angle = MPU6050.Pitch_Angle_Acc;
-      set_gyro_angles = 1;
-    }
-
-    MPU6050.Roll_Output =  MPU6050.Roll_Output* 0.9 + MPU6050.Roll_Angle*0.1 ;
-    MPU6050.Pitch_Output = MPU6050.Pitch_Output* 0.9 + MPU6050.Pitch_Angle*0.1 ;
-
-    sprintf(Roll_Data,"Roll: %.2f ",MPU6050.Roll_Output);
-    sprintf(Pitch_Data,"Pitch: %.2f ",MPU6050.Pitch_Output);
+    MPU6050_Read();
+    MPU6050_Read_Gyro();
+    sprintf(Roll_Data,"Roll: %.2f ",Gz);
+    sprintf(Pitch_Data,"Pitch: %.2f ",Gz);
+    sprintf(Yaw_Data,"Yaw: %.2f\n",Gz);
 
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
+    HAL_UART_Transmit(&huart2, Yaw_Data, sizeof(Yaw_Data), 100);
+    HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
@@ -228,7 +258,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.ClockSpeed = 400000;
+  hi2c1.Init.ClockSpeed = 100000;
   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
