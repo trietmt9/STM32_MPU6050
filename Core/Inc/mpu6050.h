@@ -37,6 +37,14 @@ typedef struct
     double Ay;
     double Az;
 
+    float Roll_Angle;
+    float Pitch_Angle;
+    float Total_Acc_Vector;
+    float Roll_Angle_Acc;
+    float Pitch_Angle_Acc;
+    float Roll_Output;
+    float Pitch_Output;
+
 
 }mpu6050_t; 
 

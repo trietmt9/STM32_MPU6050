@@ -50,7 +50,7 @@ mpu6050_t MPU6050;
 char Roll_Data[30];
 char Pitch_Data[30];
 char Yaw_Data[30];
-
+int set_gyro_angles;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -124,6 +124,31 @@ int main(void)
     MPU6050.Gx -= MPU6050.Cali_Gx;
     MPU6050.Gy -= MPU6050.Cali_Gy;
     MPU6050.Gz -= MPU6050.Cali_Gz;
+
+    MPU6050.Pitch_Angle += MPU6050.Gx * 0.0000611; 
+    MPU6050.Roll_Angle += MPU6050.Gy * 0.0000611; 
+
+    MPU6050.Pitch_Angle+= MPU6050.Roll_Angle*sin(MPU6050.Gz*0.000001066);
+    MPU6050.Roll_Angle-= MPU6050.Pitch_Angle*sin(MPU6050.Gz*0.000001066);
+
+    MPU6050.Total_Acc_Vector = sqrt(pow(MPU6050.Ax,2) + pow(MPU6050.Ay,2) + pow(MPU6050.Az,2));
+    MPU6050.Roll_Angle_Acc = asin((float)MPU6050.Ax/MPU6050.Total_Acc_Vector) * 57.296;
+    MPU6050.Pitch_Angle_Acc = asin((float)MPU6050.Ay/MPU6050.Total_Acc_Vector) * -57.296;
+
+    if(set_gyro_angles)
+    {
+      MPU6050.Roll_Angle = MPU6050.Roll_Angle *0.9996 - MPU6050.Roll_Angle_Acc*0.0004;
+      MPU6050.Pitch_Angle = MPU6050.Pitch_Angle *0.9996 - MPU6050.Pitch_Angle_Acc*0.0004;
+    }
+    else 
+    {
+      MPU6050.Roll_Angle = MPU6050.Roll_Angle_Acc;
+      MPU6050.Pitch_Angle = MPU6050.Pitch_Angle_Acc;
+      set_gyro_angles = 1;
+    }
+
+    MPU6050.Roll_Output =  MPU6050.Roll_Output* 0.9 + MPU6050.Roll_Angle*0.1 ;
+    MPU6050.Pitch_Output = MPU6050.Pitch_Output* 0.9 + MPU6050.Pitch_Angle*0.1 ;
 
     sprintf(Roll_Data,"Roll: %.2f ",MPU6050.Gx);
     sprintf(Pitch_Data,"Pitch: %.2f ",MPU6050.Gy);

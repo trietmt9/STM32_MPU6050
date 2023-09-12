@@ -44,5 +44,8 @@ void MPU6050_Read(mpu6050_t *Data)
     Data->Gx = Data->Gx_RAW/131.0;
     Data->Gy = Data->Gy_RAW/131.0;
     Data->Gz = Data->Gz_RAW/131.0;
+    
+    Data->Pitch_Angle += Data->Gx * 0.0000611; 
+    Data->Roll_Angle += Data->Gy * 0.0000611; 
 
 }
