@@ -150,11 +150,11 @@ int main(void)
     MPU6050.Roll_Output =  MPU6050.Roll_Output* 0.9 + MPU6050.Roll_Angle*0.1 ;
     MPU6050.Pitch_Output = MPU6050.Pitch_Output* 0.9 + MPU6050.Pitch_Angle*0.1 ;
 
-    sprintf(Roll_Data,"Roll: %.2f ",MPU6050.Gx);
-    sprintf(Pitch_Data,"Pitch: %.2f ",MPU6050.Gy);
-    sprintf(Yaw_Data,"Yaw: %.2f ",MPU6050.Gz);
+    sprintf(Roll_Data,"Roll: %.2f ",MPU6050.Roll_Output);
+    sprintf(Pitch_Data,"Pitch: %.2f ",MPU6050.Pitch_Output);
 
-
+    HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
+    HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
   }
   /* USER CODE END 3 */
 }
