@@ -115,8 +115,8 @@ int main(void)
     /* USER CODE BEGIN 3 */
     MPU6050_Read_Acc(&IMU);
     MPU6050_Read_Gyro(&IMU);
-    sprintf(Roll_Data,"Roll: %.2f ",IMU.Gz);
-    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gz);
+    sprintf(Roll_Data,"Roll: %.2f ",IMU.Gx);
+    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gy);
     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
 
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);

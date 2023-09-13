@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
   29:Core/Src/main.c **** /* USER CODE BEGIN PTD */
   30:Core/Src/main.c **** 
   31:Core/Src/main.c **** /* USER CODE END PTD */
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 2
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 2
 
 
   32:Core/Src/main.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
   86:Core/Src/main.c **** 
   87:Core/Src/main.c ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   88:Core/Src/main.c ****   HAL_Init();
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 3
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 3
 
 
   89:Core/Src/main.c **** 
@@ -150,8 +150,8 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  115:Core/Src/main.c ****     /* USER CODE BEGIN 3 */
  116:Core/Src/main.c ****     MPU6050_Read_Acc(&IMU);
  117:Core/Src/main.c ****     MPU6050_Read_Gyro(&IMU);
- 118:Core/Src/main.c ****     sprintf(Roll_Data,"Roll: %.2f ",IMU.Gz);
- 119:Core/Src/main.c ****     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gz);
+ 118:Core/Src/main.c ****     sprintf(Roll_Data,"Roll: %.2f ",IMU.Gx);
+ 119:Core/Src/main.c ****     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gy);
  120:Core/Src/main.c ****     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
  121:Core/Src/main.c **** 
  122:Core/Src/main.c ****     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  143:Core/Src/main.c **** 
  144:Core/Src/main.c ****   /** Initializes the RCC Oscillators according to the specified parameters
  145:Core/Src/main.c ****   * in the RCC_OscInitTypeDef structure.
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 4
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 4
 
 
  146:Core/Src/main.c ****   */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  200:Core/Src/main.c ****   hi2c1.Init.DutyCycle = I2C_DUTYCYCLE_2;
  201:Core/Src/main.c ****   hi2c1.Init.OwnAddress1 = 0;
  202:Core/Src/main.c ****   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 5
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 5
 
 
  203:Core/Src/main.c ****   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
   28              		.loc 1 256 1 view -0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 16
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 6
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 6
 
 
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
   78              		.loc 1 263 3 view .LVU16
   79 0038 1B6B     		ldr	r3, [r3, #48]
   80 003a 03F00203 		and	r3, r3, #2
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 7
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 7
 
 
   81 003e 0393     		str	r3, [sp, #12]
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
    2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
    4:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.0.4
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 8
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 8
 
 
    5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     09. April 2018
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
   59:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
   60:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
   61:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 9
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 9
 
 
   62:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  116:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  117:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  118:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 10
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 10
 
 
  119:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  145              		.loc 1 189 1 view -0
  146              		.cfi_startproc
  147              		@ args = 0, pretend = 0, frame = 0
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 11
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 11
 
 
  148              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  184              		.loc 1 206 28 is_stmt 0 view .LVU45
  185 001e 0362     		str	r3, [r0, #32]
  207:Core/Src/main.c ****   {
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 12
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 12
 
 
  186              		.loc 1 207 3 is_stmt 1 view .LVU46
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  234:Core/Src/main.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
  233              		.loc 1 234 3 is_stmt 1 view .LVU56
  234:Core/Src/main.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 13
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 13
 
 
  234              		.loc 1 234 26 is_stmt 0 view .LVU57
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  274              		.align	1
  275              		.global	SystemClock_Config
  276              		.syntax unified
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 14
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 14
 
 
  277              		.thumb
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  322 002e 009A     		ldr	r2, [sp]
  323              	.LBE9:
  141:Core/Src/main.c ****   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 15
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 15
 
 
  324              		.loc 1 141 3 view .LVU83
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  152:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
  362              		.loc 1 152 3 is_stmt 1 view .LVU100
  152:Core/Src/main.c ****   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 16
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 16
 
 
  363              		.loc 1 152 30 is_stmt 0 view .LVU101
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  399 0080 0493     		str	r3, [sp, #16]
  174:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
  400              		.loc 1 174 3 is_stmt 1 view .LVU120
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 17
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 17
 
 
  174:Core/Src/main.c ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  446              		.section	.rodata.main.str1.4,"aMS",%progbits,1
  447              		.align	2
  448              	.LC0:
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 18
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 18
 
 
  449 0000 526F6C6C 		.ascii	"Roll: %.2f \000"
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  490              		.loc 1 106 3 view .LVU137
  491 0016 FFF7FEFF 		bl	MPU6050_Init
  492              	.LVL16:
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 19
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 19
 
 
  493              	.L30:
@@ -1090,14 +1090,14 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  497 001c 2046     		mov	r0, r4
  498 001e FFF7FEFF 		bl	MPU6050_Read_Acc
  499              	.LVL17:
- 117:Core/Src/main.c ****     sprintf(Roll_Data,"Roll: %.2f ",IMU.Gz);
+ 117:Core/Src/main.c ****     sprintf(Roll_Data,"Roll: %.2f ",IMU.Gx);
  500              		.loc 1 117 5 discriminator 1 view .LVU140
  501 0022 2046     		mov	r0, r4
  502 0024 FFF7FEFF 		bl	MPU6050_Read_Gyro
  503              	.LVL18:
- 118:Core/Src/main.c ****     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gz);
+ 118:Core/Src/main.c ****     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gy);
  504              		.loc 1 118 5 discriminator 1 view .LVU141
- 505 0028 A068     		ldr	r0, [r4, #8]	@ float
+ 505 0028 2068     		ldr	r0, [r4]	@ float
  506 002a FFF7FEFF 		bl	__aeabi_f2d
  507              	.LVL19:
  508 002e 0246     		mov	r2, r0
@@ -1109,7 +1109,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  514              	.LVL20:
  119:Core/Src/main.c ****     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
  515              		.loc 1 119 5 discriminator 1 view .LVU142
- 516 003c A068     		ldr	r0, [r4, #8]	@ float
+ 516 003c 6068     		ldr	r0, [r4, #4]	@ float
  517 003e FFF7FEFF 		bl	__aeabi_f2d
  518              	.LVL21:
  519 0042 0246     		mov	r2, r0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  540 0068 1E22     		movs	r2, #30
  541 006a 3946     		mov	r1, r7
  542 006c 2046     		mov	r0, r4
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 20
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 20
 
 
  543 006e FFF7FEFF 		bl	HAL_UART_Transmit
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  592              		.section	.bss.Pitch_Data,"aw",%nobits
  593              		.align	2
  594              		.set	.LANCHOR4,. + 0
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 21
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 21
 
 
  597              	Pitch_Data:
@@ -1258,45 +1258,45 @@ ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 1
  639              		.file 13 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h"
  640              		.file 14 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  641              		.file 15 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 22
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 22
 
 
  642              		.file 16 "<built-in>"
-ARM GAS  C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s 			page 23
+ARM GAS  C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:20     .text.MX_GPIO_Init:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:25     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:95     .text.MX_GPIO_Init:00000048 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:100    .text.Error_Handler:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:106    .text.Error_Handler:00000000 Error_Handler
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:138    .text.MX_I2C1_Init:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:143    .text.MX_I2C1_Init:00000000 MX_I2C1_Init
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:201    .text.MX_I2C1_Init:0000002c $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:208    .text.MX_USART2_UART_Init:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:213    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:268    .text.MX_USART2_UART_Init:0000002c $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:274    .text.SystemClock_Config:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:280    .text.SystemClock_Config:00000000 SystemClock_Config
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:440    .text.SystemClock_Config:000000ac $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:447    .rodata.main.str1.4:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:457    .text.main:00000000 $t
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:463    .text.main:00000000 main
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:568    .text.main:00000094 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:590    .bss.IMU:00000000 IMU
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:611    .bss.Yaw_Data:00000000 Yaw_Data
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:597    .bss.Pitch_Data:00000000 Pitch_Data
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:604    .bss.Roll_Data:00000000 Roll_Data
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:625    .bss.huart2:00000000 huart2
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:618    .bss.hi2c1:00000000 hi2c1
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:586    .bss.IMU:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:593    .bss.Pitch_Data:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:600    .bss.Roll_Data:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:607    .bss.Yaw_Data:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:614    .bss.hi2c1:00000000 $d
-C:\Users\triet\AppData\Local\Temp\cc95rIQ0.s:621    .bss.huart2:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:20     .text.MX_GPIO_Init:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:25     .text.MX_GPIO_Init:00000000 MX_GPIO_Init
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:95     .text.MX_GPIO_Init:00000048 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:100    .text.Error_Handler:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:106    .text.Error_Handler:00000000 Error_Handler
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:138    .text.MX_I2C1_Init:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:143    .text.MX_I2C1_Init:00000000 MX_I2C1_Init
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:201    .text.MX_I2C1_Init:0000002c $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:208    .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:213    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:268    .text.MX_USART2_UART_Init:0000002c $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:274    .text.SystemClock_Config:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:280    .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:440    .text.SystemClock_Config:000000ac $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:447    .rodata.main.str1.4:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:457    .text.main:00000000 $t
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:463    .text.main:00000000 main
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:568    .text.main:00000094 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:590    .bss.IMU:00000000 IMU
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:611    .bss.Yaw_Data:00000000 Yaw_Data
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:597    .bss.Pitch_Data:00000000 Pitch_Data
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:604    .bss.Roll_Data:00000000 Roll_Data
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:625    .bss.huart2:00000000 huart2
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:618    .bss.hi2c1:00000000 hi2c1
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:586    .bss.IMU:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:593    .bss.Pitch_Data:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:600    .bss.Roll_Data:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:607    .bss.Yaw_Data:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:614    .bss.hi2c1:00000000 $d
+C:\Users\triet\AppData\Local\Temp\ccxr9EiK.s:621    .bss.huart2:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_I2C_Init
