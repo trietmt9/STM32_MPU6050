@@ -50,6 +50,10 @@ char Roll_Data[30];
 char Pitch_Data[30];
 char Yaw_Data[30];
 mpu6050_t IMU;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 45d5a5918c0c82d06af1aa756b8ba5175a7b412e
 
 /* USER CODE END PV */
 
@@ -67,6 +71,11 @@ static void MX_USART2_UART_Init(void);
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 45d5a5918c0c82d06af1aa756b8ba5175a7b412e
 /* USER CODE END 0 */
 
 /**
@@ -126,6 +135,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
     MPU6050_Read_Acc(&IMU);
     MPU6050_Read_Gyro(&IMU);
+<<<<<<< HEAD
 
     IMU.Gx -= IMU.Gx_Callib;
     IMU.Gy -= IMU.Gy_Callib;
@@ -134,6 +144,11 @@ int main(void)
     sprintf(Roll_Data,"Roll: %.2f ",IMU.Ax);
     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Ay);
     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Az);
+=======
+    sprintf(Roll_Data,"Roll: %.2f ",IMU.Gx);
+    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gy);
+    sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
+>>>>>>> 45d5a5918c0c82d06af1aa756b8ba5175a7b412e
 
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
