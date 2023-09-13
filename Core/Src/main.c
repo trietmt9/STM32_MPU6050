@@ -101,6 +101,20 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   MPU6050_Init();
+
+  for(int callib=0; callib < 2000; callib++)
+  {
+      MPU6050_Read_Gyro(&IMU);
+      IMU.Gx_Callib+=IMU.Gx;
+      IMU.Gy_Callib+=IMU.Gy;
+      IMU.Gz_Callib+=IMU.Gz;
+      HAL_Delay(1);
+  }
+
+  IMU.Gx_Callib/=2000;
+  IMU.Gy_Callib/=2000;
+  IMU.Gz_Callib/=2000;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -110,8 +124,13 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    MPU6050_Read(&IMU);
+    MPU6050_Read_Acc(&IMU);
     MPU6050_Read_Gyro(&IMU);
+
+    IMU.Gx -= IMU.Gx_Callib;
+    IMU.Gy -= IMU.Gy_Callib;
+    IMU.Gz -= IMU.Gz_Callib;
+
     sprintf(Roll_Data,"Roll: %.2f ",IMU.Ax);
     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Ay);
     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Az);

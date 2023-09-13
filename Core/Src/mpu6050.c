@@ -22,7 +22,7 @@ void MPU6050_Init()
     }
 }
 
-void MPU6050_Read(mpu6050_t *Data)
+void MPU6050_Read_Acc(mpu6050_t *Data)
 {
     uint8_t Accel_Data[6];
     HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Accel_Data, 6, 100);

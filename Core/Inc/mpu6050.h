@@ -12,6 +12,10 @@ extern I2C_HandleTypeDef hi2c1;
 
 typedef struct 
 {
+    float Gx_Callib;
+    float Gy_Callib;
+    float Gz_Callib;
+
     float Gx;
     float Gy;
     float Gz;
@@ -27,8 +31,10 @@ typedef struct
     int16_t Ax_RAW;
     int16_t Ay_RAW;
     int16_t Az_RAW;
+
+
 }mpu6050_t;
 
 void MPU6050_Init();
-void MPU6050_Read(mpu6050_t *Data);
+void MPU6050_Read_Acc(mpu6050_t *Data);
 void MPU6050_Read_Gyro(mpu6050_t *Data);
