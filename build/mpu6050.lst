@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\pc\AppData\Local\Temp\ccBvSbpF.s 			page 1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -20,11 +20,496 @@ ARM GAS  C:\Users\pc\AppData\Local\Temp\ccBvSbpF.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.file 1 "Core/Src/mpu6050.c"
-  20              	.Letext0:
-ARM GAS  C:\Users\pc\AppData\Local\Temp\ccBvSbpF.s 			page 2
+  20              		.section	.text.MPU6050_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	MPU6050_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	MPU6050_Init:
+  28              	.LFB130:
+   1:Core/Src/mpu6050.c **** #include <mpu6050.h>
+   2:Core/Src/mpu6050.c **** 
+   3:Core/Src/mpu6050.c **** void MPU6050_Init()
+   4:Core/Src/mpu6050.c **** {
+  29              		.loc 1 4 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 87B0     		sub	sp, sp, #28
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 48
+   5:Core/Src/mpu6050.c ****     uint8_t check; 
+  44              		.loc 1 5 5 view .LVU1
+   6:Core/Src/mpu6050.c ****     uint8_t Data;
+  45              		.loc 1 6 5 view .LVU2
+   7:Core/Src/mpu6050.c **** 
+   8:Core/Src/mpu6050.c ****     HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), WHO_AM_I, 1, &check, 1,100);
+  46              		.loc 1 8 5 view .LVU3
+  47 0004 6423     		movs	r3, #100
+  48 0006 0293     		str	r3, [sp, #8]
+  49 0008 0123     		movs	r3, #1
+  50 000a 0193     		str	r3, [sp, #4]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 2
+
+
+  51 000c 0DF11702 		add	r2, sp, #23
+  52 0010 0092     		str	r2, [sp]
+  53 0012 7522     		movs	r2, #117
+  54 0014 D021     		movs	r1, #208
+  55 0016 1F48     		ldr	r0, .L5
+  56 0018 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  57              	.LVL0:
+   9:Core/Src/mpu6050.c ****     if(check == 0x68)
+  58              		.loc 1 9 5 view .LVU4
+  59              		.loc 1 9 14 is_stmt 0 view .LVU5
+  60 001c 9DF81730 		ldrb	r3, [sp, #23]	@ zero_extendqisi2
+  61              		.loc 1 9 7 view .LVU6
+  62 0020 682B     		cmp	r3, #104
+  63 0022 01D0     		beq	.L4
+  64              	.L1:
+  10:Core/Src/mpu6050.c ****     {
+  11:Core/Src/mpu6050.c ****         Data = 0;
+  12:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), PWR_MGMT_1, 1, &Data, 1, 100);
+  13:Core/Src/mpu6050.c **** 
+  14:Core/Src/mpu6050.c ****         Data = 0x07;
+  15:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), SMPRT_DIV, 1, &Data, 1, 100);
+  16:Core/Src/mpu6050.c **** 
+  17:Core/Src/mpu6050.c ****         Data = 0x10;
+  18:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), ACCEL_CONFIG, 1,&Data, 1, 100);
+  19:Core/Src/mpu6050.c **** 
+  20:Core/Src/mpu6050.c ****         Data = 0x08;
+  21:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), GYRO_CONFIG, 1,&Data, 1, 100);
+  22:Core/Src/mpu6050.c ****     }
+  23:Core/Src/mpu6050.c **** }
+  65              		.loc 1 23 1 view .LVU7
+  66 0024 07B0     		add	sp, sp, #28
+  67              	.LCFI2:
+  68              		.cfi_remember_state
+  69              		.cfi_def_cfa_offset 20
+  70              		@ sp needed
+  71 0026 F0BD     		pop	{r4, r5, r6, r7, pc}
+  72              	.L4:
+  73              	.LCFI3:
+  74              		.cfi_restore_state
+  11:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), PWR_MGMT_1, 1, &Data, 1, 100);
+  75              		.loc 1 11 9 is_stmt 1 view .LVU8
+  11:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), PWR_MGMT_1, 1, &Data, 1, 100);
+  76              		.loc 1 11 14 is_stmt 0 view .LVU9
+  77 0028 0023     		movs	r3, #0
+  78 002a 8DF81630 		strb	r3, [sp, #22]
+  12:Core/Src/mpu6050.c **** 
+  79              		.loc 1 12 9 is_stmt 1 view .LVU10
+  80 002e 194D     		ldr	r5, .L5
+  81 0030 6427     		movs	r7, #100
+  82 0032 0297     		str	r7, [sp, #8]
+  83 0034 0124     		movs	r4, #1
+  84 0036 0194     		str	r4, [sp, #4]
+  85 0038 0DF11606 		add	r6, sp, #22
+  86 003c 0096     		str	r6, [sp]
+  87 003e 2346     		mov	r3, r4
+  88 0040 6B22     		movs	r2, #107
+  89 0042 D021     		movs	r1, #208
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 3
+
+
+  90 0044 2846     		mov	r0, r5
+  91 0046 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+  92              	.LVL1:
+  14:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), SMPRT_DIV, 1, &Data, 1, 100);
+  93              		.loc 1 14 9 view .LVU11
+  14:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), SMPRT_DIV, 1, &Data, 1, 100);
+  94              		.loc 1 14 14 is_stmt 0 view .LVU12
+  95 004a 0723     		movs	r3, #7
+  96 004c 8DF81630 		strb	r3, [sp, #22]
+  15:Core/Src/mpu6050.c **** 
+  97              		.loc 1 15 9 is_stmt 1 view .LVU13
+  98 0050 0297     		str	r7, [sp, #8]
+  99 0052 0194     		str	r4, [sp, #4]
+ 100 0054 0096     		str	r6, [sp]
+ 101 0056 2346     		mov	r3, r4
+ 102 0058 1922     		movs	r2, #25
+ 103 005a D021     		movs	r1, #208
+ 104 005c 2846     		mov	r0, r5
+ 105 005e FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 106              	.LVL2:
+  17:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), ACCEL_CONFIG, 1,&Data, 1, 100);
+ 107              		.loc 1 17 9 view .LVU14
+  17:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), ACCEL_CONFIG, 1,&Data, 1, 100);
+ 108              		.loc 1 17 14 is_stmt 0 view .LVU15
+ 109 0062 1023     		movs	r3, #16
+ 110 0064 8DF81630 		strb	r3, [sp, #22]
+  18:Core/Src/mpu6050.c **** 
+ 111              		.loc 1 18 9 is_stmt 1 view .LVU16
+ 112 0068 0297     		str	r7, [sp, #8]
+ 113 006a 0194     		str	r4, [sp, #4]
+ 114 006c 0096     		str	r6, [sp]
+ 115 006e 2346     		mov	r3, r4
+ 116 0070 1C22     		movs	r2, #28
+ 117 0072 D021     		movs	r1, #208
+ 118 0074 2846     		mov	r0, r5
+ 119 0076 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 120              	.LVL3:
+  20:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), GYRO_CONFIG, 1,&Data, 1, 100);
+ 121              		.loc 1 20 9 view .LVU17
+  20:Core/Src/mpu6050.c ****         HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), GYRO_CONFIG, 1,&Data, 1, 100);
+ 122              		.loc 1 20 14 is_stmt 0 view .LVU18
+ 123 007a 0823     		movs	r3, #8
+ 124 007c 8DF81630 		strb	r3, [sp, #22]
+  21:Core/Src/mpu6050.c ****     }
+ 125              		.loc 1 21 9 is_stmt 1 view .LVU19
+ 126 0080 0297     		str	r7, [sp, #8]
+ 127 0082 0194     		str	r4, [sp, #4]
+ 128 0084 0096     		str	r6, [sp]
+ 129 0086 2346     		mov	r3, r4
+ 130 0088 1B22     		movs	r2, #27
+ 131 008a D021     		movs	r1, #208
+ 132 008c 2846     		mov	r0, r5
+ 133 008e FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 134              	.LVL4:
+ 135              		.loc 1 23 1 is_stmt 0 view .LVU20
+ 136 0092 C7E7     		b	.L1
+ 137              	.L6:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 4
+
+
+ 138              		.align	2
+ 139              	.L5:
+ 140 0094 00000000 		.word	hi2c1
+ 141              		.cfi_endproc
+ 142              	.LFE130:
+ 144              		.global	__aeabi_i2d
+ 145              		.global	__aeabi_dmul
+ 146              		.global	__aeabi_d2f
+ 147              		.section	.text.MPU6050_Read,"ax",%progbits
+ 148              		.align	1
+ 149              		.global	MPU6050_Read
+ 150              		.syntax unified
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	MPU6050_Read:
+ 155              	.LVL5:
+ 156              	.LFB131:
+  24:Core/Src/mpu6050.c **** 
+  25:Core/Src/mpu6050.c **** void MPU6050_Read(mpu6050_t *Data)
+  26:Core/Src/mpu6050.c **** {
+ 157              		.loc 1 26 1 is_stmt 1 view -0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 8
+ 160              		@ frame_needed = 0, uses_anonymous_args = 0
+ 161              		.loc 1 26 1 is_stmt 0 view .LVU22
+ 162 0000 70B5     		push	{r4, r5, r6, lr}
+ 163              	.LCFI4:
+ 164              		.cfi_def_cfa_offset 16
+ 165              		.cfi_offset 4, -16
+ 166              		.cfi_offset 5, -12
+ 167              		.cfi_offset 6, -8
+ 168              		.cfi_offset 14, -4
+ 169 0002 86B0     		sub	sp, sp, #24
+ 170              	.LCFI5:
+ 171              		.cfi_def_cfa_offset 40
+ 172 0004 0446     		mov	r4, r0
+  27:Core/Src/mpu6050.c ****     uint8_t Accel_Data[6];
+ 173              		.loc 1 27 5 is_stmt 1 view .LVU23
+  28:Core/Src/mpu6050.c ****     HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Accel_Data, 6, 100);
+ 174              		.loc 1 28 5 view .LVU24
+ 175 0006 6423     		movs	r3, #100
+ 176 0008 0293     		str	r3, [sp, #8]
+ 177 000a 0623     		movs	r3, #6
+ 178 000c 0193     		str	r3, [sp, #4]
+ 179 000e 04AB     		add	r3, sp, #16
+ 180 0010 0093     		str	r3, [sp]
+ 181 0012 0123     		movs	r3, #1
+ 182 0014 3B22     		movs	r2, #59
+ 183 0016 D021     		movs	r1, #208
+ 184 0018 1C48     		ldr	r0, .L9
+ 185              	.LVL6:
+ 186              		.loc 1 28 5 is_stmt 0 view .LVU25
+ 187 001a FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 188              	.LVL7:
+  29:Core/Src/mpu6050.c ****     Data->Ax_RAW =(int16_t) (Accel_Data[0] <<8 | Accel_Data[1]);
+ 189              		.loc 1 29 5 is_stmt 1 view .LVU26
+ 190              		.loc 1 29 40 is_stmt 0 view .LVU27
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 5
+
+
+ 191 001e 9DF81030 		ldrb	r3, [sp, #16]	@ zero_extendqisi2
+ 192              		.loc 1 29 60 view .LVU28
+ 193 0022 9DF81100 		ldrb	r0, [sp, #17]	@ zero_extendqisi2
+ 194              		.loc 1 29 19 view .LVU29
+ 195 0026 40EA0320 		orr	r0, r0, r3, lsl #8
+ 196 002a 00B2     		sxth	r0, r0
+ 197              		.loc 1 29 18 view .LVU30
+ 198 002c E083     		strh	r0, [r4, #30]	@ movhi
+  30:Core/Src/mpu6050.c ****     Data->Ay_RAW =(int16_t) (Accel_Data[2] <<8 | Accel_Data[3]);
+ 199              		.loc 1 30 5 is_stmt 1 view .LVU31
+ 200              		.loc 1 30 40 is_stmt 0 view .LVU32
+ 201 002e 9DF81230 		ldrb	r3, [sp, #18]	@ zero_extendqisi2
+ 202              		.loc 1 30 60 view .LVU33
+ 203 0032 9DF81360 		ldrb	r6, [sp, #19]	@ zero_extendqisi2
+ 204              		.loc 1 30 19 view .LVU34
+ 205 0036 46EA0326 		orr	r6, r6, r3, lsl #8
+ 206 003a 36B2     		sxth	r6, r6
+ 207              		.loc 1 30 18 view .LVU35
+ 208 003c 2684     		strh	r6, [r4, #32]	@ movhi
+  31:Core/Src/mpu6050.c ****     Data->Az_RAW =(int16_t) (Accel_Data[4] <<8 | Accel_Data[5]);
+ 209              		.loc 1 31 5 is_stmt 1 view .LVU36
+ 210              		.loc 1 31 40 is_stmt 0 view .LVU37
+ 211 003e 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 212              		.loc 1 31 60 view .LVU38
+ 213 0042 9DF81550 		ldrb	r5, [sp, #21]	@ zero_extendqisi2
+ 214              		.loc 1 31 19 view .LVU39
+ 215 0046 45EA0325 		orr	r5, r5, r3, lsl #8
+ 216 004a 2DB2     		sxth	r5, r5
+ 217              		.loc 1 31 18 view .LVU40
+ 218 004c 6584     		strh	r5, [r4, #34]	@ movhi
+  32:Core/Src/mpu6050.c ****  
+  33:Core/Src/mpu6050.c ****     Data->Ax = Data->Ax_RAW/4096.0;
+ 219              		.loc 1 33 5 is_stmt 1 view .LVU41
+ 220              		.loc 1 33 28 is_stmt 0 view .LVU42
+ 221 004e FFF7FEFF 		bl	__aeabi_i2d
+ 222              	.LVL8:
+ 223 0052 0022     		movs	r2, #0
+ 224 0054 0E4B     		ldr	r3, .L9+4
+ 225 0056 FFF7FEFF 		bl	__aeabi_dmul
+ 226              	.LVL9:
+ 227 005a FFF7FEFF 		bl	__aeabi_d2f
+ 228              	.LVL10:
+ 229              		.loc 1 33 14 view .LVU43
+ 230 005e E060     		str	r0, [r4, #12]	@ float
+  34:Core/Src/mpu6050.c ****     Data->Ay = Data->Ay_RAW/4096.0;
+ 231              		.loc 1 34 5 is_stmt 1 view .LVU44
+ 232              		.loc 1 34 28 is_stmt 0 view .LVU45
+ 233 0060 3046     		mov	r0, r6
+ 234 0062 FFF7FEFF 		bl	__aeabi_i2d
+ 235              	.LVL11:
+ 236 0066 0022     		movs	r2, #0
+ 237 0068 094B     		ldr	r3, .L9+4
+ 238 006a FFF7FEFF 		bl	__aeabi_dmul
+ 239              	.LVL12:
+ 240 006e FFF7FEFF 		bl	__aeabi_d2f
+ 241              	.LVL13:
+ 242              		.loc 1 34 14 view .LVU46
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 6
+
+
+ 243 0072 2061     		str	r0, [r4, #16]	@ float
+  35:Core/Src/mpu6050.c ****     Data->Az = Data->Az_RAW/4096.0;
+ 244              		.loc 1 35 5 is_stmt 1 view .LVU47
+ 245              		.loc 1 35 28 is_stmt 0 view .LVU48
+ 246 0074 2846     		mov	r0, r5
+ 247 0076 FFF7FEFF 		bl	__aeabi_i2d
+ 248              	.LVL14:
+ 249 007a 0022     		movs	r2, #0
+ 250 007c 044B     		ldr	r3, .L9+4
+ 251 007e FFF7FEFF 		bl	__aeabi_dmul
+ 252              	.LVL15:
+ 253 0082 FFF7FEFF 		bl	__aeabi_d2f
+ 254              	.LVL16:
+ 255              		.loc 1 35 14 view .LVU49
+ 256 0086 6061     		str	r0, [r4, #20]	@ float
+  36:Core/Src/mpu6050.c **** }
+ 257              		.loc 1 36 1 view .LVU50
+ 258 0088 06B0     		add	sp, sp, #24
+ 259              	.LCFI6:
+ 260              		.cfi_def_cfa_offset 16
+ 261              		@ sp needed
+ 262 008a 70BD     		pop	{r4, r5, r6, pc}
+ 263              	.LVL17:
+ 264              	.L10:
+ 265              		.loc 1 36 1 view .LVU51
+ 266              		.align	2
+ 267              	.L9:
+ 268 008c 00000000 		.word	hi2c1
+ 269 0090 0000303F 		.word	1060110336
+ 270              		.cfi_endproc
+ 271              	.LFE131:
+ 273              		.global	__aeabi_ddiv
+ 274              		.section	.text.MPU6050_Read_Gyro,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	MPU6050_Read_Gyro
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 281              	MPU6050_Read_Gyro:
+ 282              	.LVL18:
+ 283              	.LFB132:
+  37:Core/Src/mpu6050.c **** 
+  38:Core/Src/mpu6050.c **** void MPU6050_Read_Gyro(mpu6050_t *Data)
+  39:Core/Src/mpu6050.c **** {
+ 284              		.loc 1 39 1 is_stmt 1 view -0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 8
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              		.loc 1 39 1 is_stmt 0 view .LVU53
+ 289 0000 70B5     		push	{r4, r5, r6, lr}
+ 290              	.LCFI7:
+ 291              		.cfi_def_cfa_offset 16
+ 292              		.cfi_offset 4, -16
+ 293              		.cfi_offset 5, -12
+ 294              		.cfi_offset 6, -8
+ 295              		.cfi_offset 14, -4
+ 296 0002 86B0     		sub	sp, sp, #24
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 7
+
+
+ 297              	.LCFI8:
+ 298              		.cfi_def_cfa_offset 40
+ 299 0004 0446     		mov	r4, r0
+  40:Core/Src/mpu6050.c ****     uint8_t Gyro_Data[6];
+ 300              		.loc 1 40 5 is_stmt 1 view .LVU54
+  41:Core/Src/mpu6050.c ****     HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Gyro_Data, 6, 100);
+ 301              		.loc 1 41 5 view .LVU55
+ 302 0006 6423     		movs	r3, #100
+ 303 0008 0293     		str	r3, [sp, #8]
+ 304 000a 0623     		movs	r3, #6
+ 305 000c 0193     		str	r3, [sp, #4]
+ 306 000e 04AB     		add	r3, sp, #16
+ 307 0010 0093     		str	r3, [sp]
+ 308 0012 0123     		movs	r3, #1
+ 309 0014 3B22     		movs	r2, #59
+ 310 0016 D021     		movs	r1, #208
+ 311 0018 2148     		ldr	r0, .L13+8
+ 312              	.LVL19:
+ 313              		.loc 1 41 5 is_stmt 0 view .LVU56
+ 314 001a FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 315              	.LVL20:
+  42:Core/Src/mpu6050.c ****     Data->Gx_RAW =(int16_t) (Gyro_Data[0] << 8 | Gyro_Data[1]);
+ 316              		.loc 1 42 5 is_stmt 1 view .LVU57
+ 317              		.loc 1 42 39 is_stmt 0 view .LVU58
+ 318 001e 9DF81030 		ldrb	r3, [sp, #16]	@ zero_extendqisi2
+ 319              		.loc 1 42 59 view .LVU59
+ 320 0022 9DF81100 		ldrb	r0, [sp, #17]	@ zero_extendqisi2
+ 321              		.loc 1 42 19 view .LVU60
+ 322 0026 40EA0320 		orr	r0, r0, r3, lsl #8
+ 323 002a 00B2     		sxth	r0, r0
+ 324              		.loc 1 42 18 view .LVU61
+ 325 002c 2083     		strh	r0, [r4, #24]	@ movhi
+  43:Core/Src/mpu6050.c ****     Data->Gy_RAW =(int16_t) (Gyro_Data[2] << 8 | Gyro_Data[3]);
+ 326              		.loc 1 43 5 is_stmt 1 view .LVU62
+ 327              		.loc 1 43 39 is_stmt 0 view .LVU63
+ 328 002e 9DF81230 		ldrb	r3, [sp, #18]	@ zero_extendqisi2
+ 329              		.loc 1 43 59 view .LVU64
+ 330 0032 9DF81360 		ldrb	r6, [sp, #19]	@ zero_extendqisi2
+ 331              		.loc 1 43 19 view .LVU65
+ 332 0036 46EA0326 		orr	r6, r6, r3, lsl #8
+ 333 003a 36B2     		sxth	r6, r6
+ 334              		.loc 1 43 18 view .LVU66
+ 335 003c 6683     		strh	r6, [r4, #26]	@ movhi
+  44:Core/Src/mpu6050.c ****     Data->Gz_RAW =(int16_t) (Gyro_Data[4] << 8 | Gyro_Data[5]);
+ 336              		.loc 1 44 5 is_stmt 1 view .LVU67
+ 337              		.loc 1 44 39 is_stmt 0 view .LVU68
+ 338 003e 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 339              		.loc 1 44 59 view .LVU69
+ 340 0042 9DF81550 		ldrb	r5, [sp, #21]	@ zero_extendqisi2
+ 341              		.loc 1 44 19 view .LVU70
+ 342 0046 45EA0325 		orr	r5, r5, r3, lsl #8
+ 343 004a 2DB2     		sxth	r5, r5
+ 344              		.loc 1 44 18 view .LVU71
+ 345 004c A583     		strh	r5, [r4, #28]	@ movhi
+  45:Core/Src/mpu6050.c **** 
+  46:Core/Src/mpu6050.c ****     Data->Gx = Data->Gx_RAW/65.5;
+ 346              		.loc 1 46 5 is_stmt 1 view .LVU72
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 8
+
+
+ 347              		.loc 1 46 28 is_stmt 0 view .LVU73
+ 348 004e FFF7FEFF 		bl	__aeabi_i2d
+ 349              	.LVL21:
+ 350 0052 11A3     		adr	r3, .L13
+ 351 0054 D3E90023 		ldrd	r2, [r3]
+ 352 0058 FFF7FEFF 		bl	__aeabi_ddiv
+ 353              	.LVL22:
+ 354 005c FFF7FEFF 		bl	__aeabi_d2f
+ 355              	.LVL23:
+ 356              		.loc 1 46 14 view .LVU74
+ 357 0060 2060     		str	r0, [r4]	@ float
+  47:Core/Src/mpu6050.c ****     Data->Gy = Data->Gy_RAW/65.5;
+ 358              		.loc 1 47 5 is_stmt 1 view .LVU75
+ 359              		.loc 1 47 28 is_stmt 0 view .LVU76
+ 360 0062 3046     		mov	r0, r6
+ 361 0064 FFF7FEFF 		bl	__aeabi_i2d
+ 362              	.LVL24:
+ 363 0068 0BA3     		adr	r3, .L13
+ 364 006a D3E90023 		ldrd	r2, [r3]
+ 365 006e FFF7FEFF 		bl	__aeabi_ddiv
+ 366              	.LVL25:
+ 367 0072 FFF7FEFF 		bl	__aeabi_d2f
+ 368              	.LVL26:
+ 369              		.loc 1 47 14 view .LVU77
+ 370 0076 6060     		str	r0, [r4, #4]	@ float
+  48:Core/Src/mpu6050.c ****     Data->Gz = Data->Gz_RAW/65.5;
+ 371              		.loc 1 48 5 is_stmt 1 view .LVU78
+ 372              		.loc 1 48 28 is_stmt 0 view .LVU79
+ 373 0078 2846     		mov	r0, r5
+ 374 007a FFF7FEFF 		bl	__aeabi_i2d
+ 375              	.LVL27:
+ 376 007e 06A3     		adr	r3, .L13
+ 377 0080 D3E90023 		ldrd	r2, [r3]
+ 378 0084 FFF7FEFF 		bl	__aeabi_ddiv
+ 379              	.LVL28:
+ 380 0088 FFF7FEFF 		bl	__aeabi_d2f
+ 381              	.LVL29:
+ 382              		.loc 1 48 14 view .LVU80
+ 383 008c A060     		str	r0, [r4, #8]	@ float
+  49:Core/Src/mpu6050.c **** }...
+ 384              		.loc 1 49 1 view .LVU81
+ 385 008e 06B0     		add	sp, sp, #24
+ 386              	.LCFI9:
+ 387              		.cfi_def_cfa_offset 16
+ 388              		@ sp needed
+ 389 0090 70BD     		pop	{r4, r5, r6, pc}
+ 390              	.LVL30:
+ 391              	.L14:
+ 392              		.loc 1 49 1 view .LVU82
+ 393 0092 00BFAFF3 		.align	3
+ 393      0080
+ 394              	.L13:
+ 395 0098 00000000 		.word	0
+ 396 009c 00605040 		.word	1079009280
+ 397 00a0 00000000 		.word	hi2c1
+ 398              		.cfi_endproc
+ 399              	.LFE132:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 9
+
+
+ 401              		.text
+ 402              	.Letext0:
+ 403              		.file 2 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\12.2 mpacbti-rel1\\arm-none-eab
+ 404              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\12.2 mpacbti-rel1\\arm-none-eab
+ 405              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 406              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 407              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 408              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 409              		.file 8 "Core/Inc/mpu6050.h"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 mpu6050.c
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:21     .text.MPU6050_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:27     .text.MPU6050_Init:00000000 MPU6050_Init
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:140    .text.MPU6050_Init:00000094 $d
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:148    .text.MPU6050_Read:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:154    .text.MPU6050_Read:00000000 MPU6050_Read
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:268    .text.MPU6050_Read:0000008c $d
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:275    .text.MPU6050_Read_Gyro:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:281    .text.MPU6050_Read_Gyro:00000000 MPU6050_Read_Gyro
+C:\Users\pc\AppData\Local\Temp\ccd3pkzZ.s:395    .text.MPU6050_Read_Gyro:00000098 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+HAL_I2C_Mem_Read
+HAL_I2C_Mem_Write
+hi2c1
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_d2f
+__aeabi_ddiv

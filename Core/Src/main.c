@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <mpu6050.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,14 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MPU6050_Address         0xD0
-#define WHO_AM_I                0x75
-#define SMPRT_DIV               0x19
-#define GYRO_CONFIG             0x1B
-#define GYRO_XOUT               0x43
-#define ACCEL_CONFIG            0x1C
-#define ACCEL_XOUT              0x3B
-#define PWR_MGMT_1              0x6B
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,22 +49,7 @@ UART_HandleTypeDef huart2;
 char Roll_Data[30];
 char Pitch_Data[30];
 char Yaw_Data[30];
-
-float Gx;
-float Gy;
-float Gz;
-
-float Ax;
-float Ay;
-float Az;
-
-int16_t Gx_RAW;
-int16_t Gy_RAW;
-int16_t Gz_RAW;
-
-int16_t Ax_RAW;
-int16_t Ay_RAW;
-int16_t Az_RAW;
+mpu6050_t IMU;
 
 /* USER CODE END PV */
 
@@ -85,53 +64,9 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void MPU6050_Init()
-{
-    uint8_t check; 
-    uint8_t Data;
 
-    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), WHO_AM_I, 1, &check, 1,100);
-    if(check == MPU6050_Address)
-    {
-        Data = 0;
-        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), PWR_MGMT_1, 1, &Data, 1, 100);
 
-        Data = 0x07;
-        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), SMPRT_DIV, 1, &Data, 1, 100);
 
-        Data = 0x0;
-        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), ACCEL_CONFIG, 1,&Data, 1, 100);
-
-        Data = 0x0;
-        HAL_I2C_Mem_Write(&hi2c1, (MPU6050_Address), GYRO_CONFIG, 1,&Data, 1, 100);
-    }
-}
-
-void MPU6050_Read()
-{
-    uint8_t Accel_Data[6];
-    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Accel_Data, 6, 100);
-    Ax_RAW =(int16_t) (Accel_Data[0] <<8 | Accel_Data[1]);
-    Ay_RAW =(int16_t) (Accel_Data[2] <<8 | Accel_Data[3]);
-    Az_RAW =(int16_t) (Accel_Data[4] <<8 | Accel_Data[5]);
- 
-    Ax = Ax_RAW/4096.0;
-    Ay = Ay_RAW/4096.0;
-    Az = Az_RAW/4096.0;
-}
-
-void MPU6050_Read_Gyro()
-{
-    uint8_t Gyro_Data[6];
-    HAL_I2C_Mem_Read(&hi2c1, (MPU6050_Address), ACCEL_XOUT, 1, &Gyro_Data, 6, 100);
-    Gx_RAW =(int16_t) (Gyro_Data[0] << 8 | Gyro_Data[1]);
-    Gy_RAW =(int16_t) (Gyro_Data[2] << 8 | Gyro_Data[3]);
-    Gz_RAW =(int16_t) (Gyro_Data[4] << 8 | Gyro_Data[5]);
-
-    Gx = Gx_RAW/65.5;
-    Gy = Gy_RAW/65.5;
-    Gz = Gz_RAW/65.5;
-}
 /* USER CODE END 0 */
 
 /**
@@ -175,11 +110,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    MPU6050_Read();
-    MPU6050_Read_Gyro();
-    sprintf(Roll_Data,"Roll: %.2f ",Gz);
-    sprintf(Pitch_Data,"Pitch: %.2f ",Gz);
-    sprintf(Yaw_Data,"Yaw: %.2f\n",Gz);
+    MPU6050_Read(&IMU);
+    MPU6050_Read_Gyro(&IMU);
+    sprintf(Roll_Data,"Roll: %.2f ",IMU.Ax);
+    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Ay);
+    sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Az);
 
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
