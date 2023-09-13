@@ -138,7 +138,7 @@ int main(void)
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
     HAL_UART_Transmit(&huart2, Yaw_Data, sizeof(Yaw_Data), 100);
-    HAL_Delay(500);
+    HAL_Delay(100);
   }
   /* USER CODE END 3 */
 }
