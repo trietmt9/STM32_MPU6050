@@ -2,6 +2,16 @@
 
 extern I2C_HandleTypeDef hi2c1;
 
+kalman_t KalmanX = {
+    .R = 3,
+    .Q = 3
+};
+
+kalman_t KalmanY = {
+    .R = 3,
+    .Q = 3
+};
+
 void MPU6050_Init()
 {
     uint8_t check,Data; 
@@ -49,4 +59,19 @@ void MPU6050_Read_Gyro(mpu6050_t *Data)
     Data->Gx = Data->Gx_RAW/65.5;
     Data->Gy = Data->Gy_RAW/65.5;
     Data->Gz = Data->Gz_RAW/65.5;
+}
+
+void KalmanFilter(kalman_t *KalmanAngle, float Rate, float Angle )
+{
+    KalmanAngle->x = KalmanAngle->x + Rate; 
+    KalmanAngle->P = KalmanAngle->P + KalmanAngle->Q;
+
+    float RP = KalmanAngle->P + KalmanAngle->R;
+
+    KalmanAngle->Kalman = KalmanAngle->P/RP;
+
+    KalmanAngle->angle = KalmanAngle->angle + KalmanAngle->Kalman*( Angle - KalmanAngle->x);
+
+    KalmanAngle->P = (1-KalmanAngle->Kalman) * KalmanAngle->P;
+    
 }
