@@ -104,7 +104,7 @@ int main(void)
 
   for(int callib=0; callib < 2000; callib++)
   {
-      MPU6050_Read_Gyro(&IMU);
+      MPU6050_Read(&IMU);
       IMU.Gx_Callib+=IMU.Gx;
       IMU.Gy_Callib+=IMU.Gy;
       IMU.Gz_Callib+=IMU.Gz;
@@ -124,21 +124,20 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    MPU6050_Read_Acc(&IMU);
-    MPU6050_Read_Gyro(&IMU);
+    MPU6050_Read(&IMU);
 
     IMU.Gx -= IMU.Gx_Callib;
     IMU.Gy -= IMU.Gy_Callib;
     IMU.Gz -= IMU.Gz_Callib;
 
-    sprintf(Roll_Data,"Roll: %.2f ",IMU.Gx);
-    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Gy);
+    sprintf(Roll_Data,"Roll: %.2f ",IMU.Roll);
+    sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Pitch);
     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
 
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
-    HAL_UART_Transmit(&huart2, Yaw_Data, sizeof(Yaw_Data), 100);
-    HAL_Delay(100);
+    // HAL_UART_Transmit(&huart2, Yaw_Data, sizeof(Yaw_Data), 100);
+    HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }

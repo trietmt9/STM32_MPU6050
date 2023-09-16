@@ -11,6 +11,7 @@
 #define ACCEL_CONFIG            0x1C
 #define ACCEL_XOUT              0x3B
 #define PWR_MGMT_1              0x6B
+#define RAD2DEG                 57.2957795131
 typedef struct 
 {
     float Gx;
@@ -32,6 +33,9 @@ typedef struct
     int16_t Az_RAW;
     float Roll;
     float Pitch;
+
+    float KalmanRoll;
+    float KalmanPitch;
 }mpu6050_t;
 typedef struct 
 {
@@ -45,9 +49,8 @@ typedef struct
 }kalman_t;
 
 void MPU6050_Init();
-void MPU6050_Read_Acc(mpu6050_t *Data);
-void MPU6050_Read_Gyro(mpu6050_t *Data);
-void KalmanFilter(kalman_t *KalmanAngle, float Rate, float Angle);
+void MPU6050_Read(mpu6050_t *Data);
+float KalmanFilter(kalman_t *KalmanAngle, float Rate, float Angle);
 #endif
 
 
