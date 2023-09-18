@@ -49,6 +49,7 @@ UART_HandleTypeDef huart2;
 char Roll_Data[30];
 char Pitch_Data[30];
 char Yaw_Data[30];
+
 mpu6050_t IMU;
 
 /* USER CODE END PV */
@@ -130,13 +131,14 @@ int main(void)
     IMU.Gy -= IMU.Gy_Callib;
     IMU.Gz -= IMU.Gz_Callib;
 
+
     sprintf(Roll_Data,"Roll: %.2f ",IMU.Roll);
     sprintf(Pitch_Data,"Pitch: %.2f ",IMU.Pitch);
     sprintf(Yaw_Data,"Yaw: %.2f\n",IMU.Gz);
 
+
     HAL_UART_Transmit(&huart2, Roll_Data, sizeof(Roll_Data), 100);
     HAL_UART_Transmit(&huart2, Pitch_Data, sizeof(Pitch_Data), 100);
-    // HAL_UART_Transmit(&huart2, Yaw_Data, sizeof(Yaw_Data), 100);
     HAL_Delay(500);
   }
   /* USER CODE END 3 */

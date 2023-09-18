@@ -1,0 +1,1313 @@
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"bmp180.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/bmp180.c"
+  20              		.section	.text.BMP180_Init,"ax",%progbits
+  21              		.align	1
+  22              		.global	BMP180_Init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	BMP180_Init:
+  28              	.LFB130:
+   1:Core/Src/bmp180.c **** #include <bmp180.h>
+   2:Core/Src/bmp180.c **** 
+   3:Core/Src/bmp180.c **** extern I2C_HandleTypeDef hi2c1;
+   4:Core/Src/bmp180.c **** 
+   5:Core/Src/bmp180.c **** void BMP180_Init(bmp180_t Data)
+   6:Core/Src/bmp180.c **** {
+  29              		.loc 1 6 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 76, pretend = 16, frame = 24
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 84B0     		sub	sp, sp, #16
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36 0002 00B5     		push	{lr}
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 20
+  39              		.cfi_offset 14, -20
+  40 0004 8BB0     		sub	sp, sp, #44
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_offset 64
+  43 0006 0DF1300C 		add	ip, sp, #48
+  44 000a 8CE80F00 		stm	ip, {r0, r1, r2, r3}
+   7:Core/Src/bmp180.c ****     uint8_t Callib_Data[22] = {0};
+  45              		.loc 1 7 5 view .LVU1
+  46              		.loc 1 7 13 is_stmt 0 view .LVU2
+  47 000e 0023     		movs	r3, #0
+  48 0010 0493     		str	r3, [sp, #16]
+  49 0012 0593     		str	r3, [sp, #20]
+  50 0014 0693     		str	r3, [sp, #24]
+  51 0016 0793     		str	r3, [sp, #28]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 2
+
+
+  52 0018 0893     		str	r3, [sp, #32]
+  53 001a ADF82430 		strh	r3, [sp, #36]	@ movhi
+   8:Core/Src/bmp180.c ****     uint16_t Callib_Start = 0xAA;
+  54              		.loc 1 8 5 is_stmt 1 view .LVU3
+  55              	.LVL0:
+   9:Core/Src/bmp180.c ****     HAL_I2C_Mem_Read(&hi2c1, BMP180_Address, Callib_Start, 1, Callib_Data, 22, HAL_MAX_DELAY);
+  56              		.loc 1 9 5 view .LVU4
+  57 001e 4FF0FF33 		mov	r3, #-1
+  58 0022 0293     		str	r3, [sp, #8]
+  59 0024 1623     		movs	r3, #22
+  60 0026 0193     		str	r3, [sp, #4]
+  61 0028 04AB     		add	r3, sp, #16
+  62 002a 0093     		str	r3, [sp]
+  63 002c 0123     		movs	r3, #1
+  64 002e AA22     		movs	r2, #170
+  65 0030 EE21     		movs	r1, #238
+  66 0032 3048     		ldr	r0, .L3
+  67 0034 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+  68              	.LVL1:
+  10:Core/Src/bmp180.c ****     Data.AC1 = ((Callib_Data[0]<<8) | Callib_Data[1]);
+  69              		.loc 1 10 5 view .LVU5
+  70              		.loc 1 10 29 is_stmt 0 view .LVU6
+  71 0038 9DF81020 		ldrb	r2, [sp, #16]	@ zero_extendqisi2
+  72              		.loc 1 10 50 view .LVU7
+  73 003c 9DF81130 		ldrb	r3, [sp, #17]	@ zero_extendqisi2
+  74              		.loc 1 10 37 view .LVU8
+  75 0040 43EA0223 		orr	r3, r3, r2, lsl #8
+  76              		.loc 1 10 14 view .LVU9
+  77 0044 ADF83030 		strh	r3, [sp, #48]	@ movhi
+  11:Core/Src/bmp180.c ****     Data.AC2 = ((Callib_Data[2]<<8) | Callib_Data[3]); 
+  78              		.loc 1 11 5 is_stmt 1 view .LVU10
+  79              		.loc 1 11 29 is_stmt 0 view .LVU11
+  80 0048 9DF81220 		ldrb	r2, [sp, #18]	@ zero_extendqisi2
+  81              		.loc 1 11 50 view .LVU12
+  82 004c 9DF81330 		ldrb	r3, [sp, #19]	@ zero_extendqisi2
+  83              		.loc 1 11 37 view .LVU13
+  84 0050 43EA0223 		orr	r3, r3, r2, lsl #8
+  85              		.loc 1 11 14 view .LVU14
+  86 0054 ADF83230 		strh	r3, [sp, #50]	@ movhi
+  12:Core/Src/bmp180.c ****     Data.AC3 = ((Callib_Data[4]<<8) | Callib_Data[5]); 
+  87              		.loc 1 12 5 is_stmt 1 view .LVU15
+  88              		.loc 1 12 29 is_stmt 0 view .LVU16
+  89 0058 9DF81420 		ldrb	r2, [sp, #20]	@ zero_extendqisi2
+  90              		.loc 1 12 50 view .LVU17
+  91 005c 9DF81530 		ldrb	r3, [sp, #21]	@ zero_extendqisi2
+  92              		.loc 1 12 37 view .LVU18
+  93 0060 43EA0223 		orr	r3, r3, r2, lsl #8
+  94              		.loc 1 12 14 view .LVU19
+  95 0064 ADF83430 		strh	r3, [sp, #52]	@ movhi
+  13:Core/Src/bmp180.c ****     Data.AC4 = ((Callib_Data[6]<<8) | Callib_Data[7]); 
+  96              		.loc 1 13 5 is_stmt 1 view .LVU20
+  97              		.loc 1 13 29 is_stmt 0 view .LVU21
+  98 0068 9DF81620 		ldrb	r2, [sp, #22]	@ zero_extendqisi2
+  99              		.loc 1 13 50 view .LVU22
+ 100 006c 9DF81730 		ldrb	r3, [sp, #23]	@ zero_extendqisi2
+ 101              		.loc 1 13 37 view .LVU23
+ 102 0070 43EA0223 		orr	r3, r3, r2, lsl #8
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 3
+
+
+ 103              		.loc 1 13 14 view .LVU24
+ 104 0074 ADF83630 		strh	r3, [sp, #54]	@ movhi
+  14:Core/Src/bmp180.c ****     Data.AC5 = ((Callib_Data[8]<<8) | Callib_Data[9]);
+ 105              		.loc 1 14 5 is_stmt 1 view .LVU25
+ 106              		.loc 1 14 29 is_stmt 0 view .LVU26
+ 107 0078 9DF81820 		ldrb	r2, [sp, #24]	@ zero_extendqisi2
+ 108              		.loc 1 14 50 view .LVU27
+ 109 007c 9DF81930 		ldrb	r3, [sp, #25]	@ zero_extendqisi2
+ 110              		.loc 1 14 37 view .LVU28
+ 111 0080 43EA0223 		orr	r3, r3, r2, lsl #8
+ 112              		.loc 1 14 14 view .LVU29
+ 113 0084 ADF83830 		strh	r3, [sp, #56]	@ movhi
+  15:Core/Src/bmp180.c ****     Data.AC6 = ((Callib_Data[10]<<8) | Callib_Data[11]);
+ 114              		.loc 1 15 5 is_stmt 1 view .LVU30
+ 115              		.loc 1 15 29 is_stmt 0 view .LVU31
+ 116 0088 9DF81A20 		ldrb	r2, [sp, #26]	@ zero_extendqisi2
+ 117              		.loc 1 15 51 view .LVU32
+ 118 008c 9DF81B30 		ldrb	r3, [sp, #27]	@ zero_extendqisi2
+ 119              		.loc 1 15 38 view .LVU33
+ 120 0090 43EA0223 		orr	r3, r3, r2, lsl #8
+ 121              		.loc 1 15 14 view .LVU34
+ 122 0094 ADF83A30 		strh	r3, [sp, #58]	@ movhi
+  16:Core/Src/bmp180.c **** 
+  17:Core/Src/bmp180.c ****     Data.B1 = ((Callib_Data[12]<<8) | Callib_Data[13]); 
+ 123              		.loc 1 17 5 is_stmt 1 view .LVU35
+ 124              		.loc 1 17 28 is_stmt 0 view .LVU36
+ 125 0098 9DF81C20 		ldrb	r2, [sp, #28]	@ zero_extendqisi2
+ 126              		.loc 1 17 50 view .LVU37
+ 127 009c 9DF81D30 		ldrb	r3, [sp, #29]	@ zero_extendqisi2
+ 128              		.loc 1 17 37 view .LVU38
+ 129 00a0 43EA0223 		orr	r3, r3, r2, lsl #8
+ 130              		.loc 1 17 13 view .LVU39
+ 131 00a4 ADF83C30 		strh	r3, [sp, #60]	@ movhi
+  18:Core/Src/bmp180.c ****     Data.B2 = ((Callib_Data[14]<<8) | Callib_Data[15]); 
+ 132              		.loc 1 18 5 is_stmt 1 view .LVU40
+ 133              		.loc 1 18 28 is_stmt 0 view .LVU41
+ 134 00a8 9DF81E20 		ldrb	r2, [sp, #30]	@ zero_extendqisi2
+ 135              		.loc 1 18 50 view .LVU42
+ 136 00ac 9DF81F30 		ldrb	r3, [sp, #31]	@ zero_extendqisi2
+ 137              		.loc 1 18 37 view .LVU43
+ 138 00b0 43EA0223 		orr	r3, r3, r2, lsl #8
+ 139              		.loc 1 18 13 view .LVU44
+ 140 00b4 ADF83E30 		strh	r3, [sp, #62]	@ movhi
+  19:Core/Src/bmp180.c ****     Data.MB = ((Callib_Data[16]<<8) | Callib_Data[17]); 
+ 141              		.loc 1 19 5 is_stmt 1 view .LVU45
+ 142              		.loc 1 19 28 is_stmt 0 view .LVU46
+ 143 00b8 9DF82020 		ldrb	r2, [sp, #32]	@ zero_extendqisi2
+ 144              		.loc 1 19 50 view .LVU47
+ 145 00bc 9DF82130 		ldrb	r3, [sp, #33]	@ zero_extendqisi2
+ 146              		.loc 1 19 37 view .LVU48
+ 147 00c0 43EA0223 		orr	r3, r3, r2, lsl #8
+ 148              		.loc 1 19 13 view .LVU49
+ 149 00c4 ADF84030 		strh	r3, [sp, #64]	@ movhi
+  20:Core/Src/bmp180.c ****     Data.MC = ((Callib_Data[18]<<8) | Callib_Data[19]);
+ 150              		.loc 1 20 5 is_stmt 1 view .LVU50
+ 151              		.loc 1 20 28 is_stmt 0 view .LVU51
+ 152 00c8 9DF82220 		ldrb	r2, [sp, #34]	@ zero_extendqisi2
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 4
+
+
+ 153              		.loc 1 20 50 view .LVU52
+ 154 00cc 9DF82330 		ldrb	r3, [sp, #35]	@ zero_extendqisi2
+ 155              		.loc 1 20 37 view .LVU53
+ 156 00d0 43EA0223 		orr	r3, r3, r2, lsl #8
+ 157              		.loc 1 20 13 view .LVU54
+ 158 00d4 ADF84230 		strh	r3, [sp, #66]	@ movhi
+  21:Core/Src/bmp180.c ****     Data.MD = ((Callib_Data[20]<<8) | Callib_Data[21]);
+ 159              		.loc 1 21 5 is_stmt 1 view .LVU55
+ 160              		.loc 1 21 28 is_stmt 0 view .LVU56
+ 161 00d8 9DF82420 		ldrb	r2, [sp, #36]	@ zero_extendqisi2
+ 162              		.loc 1 21 50 view .LVU57
+ 163 00dc 9DF82530 		ldrb	r3, [sp, #37]	@ zero_extendqisi2
+ 164              		.loc 1 21 37 view .LVU58
+ 165 00e0 43EA0223 		orr	r3, r3, r2, lsl #8
+ 166              		.loc 1 21 13 view .LVU59
+ 167 00e4 ADF84430 		strh	r3, [sp, #68]	@ movhi
+  22:Core/Src/bmp180.c **** }
+ 168              		.loc 1 22 1 view .LVU60
+ 169 00e8 0BB0     		add	sp, sp, #44
+ 170              	.LCFI3:
+ 171              		.cfi_def_cfa_offset 20
+ 172              		@ sp needed
+ 173 00ea 5DF804EB 		ldr	lr, [sp], #4
+ 174              	.LCFI4:
+ 175              		.cfi_restore 14
+ 176              		.cfi_def_cfa_offset 16
+ 177 00ee 04B0     		add	sp, sp, #16
+ 178              	.LCFI5:
+ 179              		.cfi_def_cfa_offset 0
+ 180 00f0 7047     		bx	lr
+ 181              	.L4:
+ 182 00f2 00BF     		.align	2
+ 183              	.L3:
+ 184 00f4 00000000 		.word	hi2c1
+ 185              		.cfi_endproc
+ 186              	.LFE130:
+ 188              		.section	.text.Read_UT,"ax",%progbits
+ 189              		.align	1
+ 190              		.global	Read_UT
+ 191              		.syntax unified
+ 192              		.thumb
+ 193              		.thumb_func
+ 195              	Read_UT:
+ 196              	.LFB131:
+  23:Core/Src/bmp180.c **** 
+  24:Core/Src/bmp180.c **** uint16_t Read_UT(bmp180_t Data)
+  25:Core/Src/bmp180.c **** {
+ 197              		.loc 1 25 1 is_stmt 1 view -0
+ 198              		.cfi_startproc
+ 199              		@ args = 76, pretend = 16, frame = 8
+ 200              		@ frame_needed = 0, uses_anonymous_args = 0
+ 201 0000 84B0     		sub	sp, sp, #16
+ 202              	.LCFI6:
+ 203              		.cfi_def_cfa_offset 16
+ 204 0002 70B5     		push	{r4, r5, r6, lr}
+ 205              	.LCFI7:
+ 206              		.cfi_def_cfa_offset 32
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 5
+
+
+ 207              		.cfi_offset 4, -32
+ 208              		.cfi_offset 5, -28
+ 209              		.cfi_offset 6, -24
+ 210              		.cfi_offset 14, -20
+ 211 0004 86B0     		sub	sp, sp, #24
+ 212              	.LCFI8:
+ 213              		.cfi_def_cfa_offset 56
+ 214 0006 0AAC     		add	r4, sp, #40
+ 215 0008 84E80F00 		stm	r4, {r0, r1, r2, r3}
+  26:Core/Src/bmp180.c ****     uint8_t Write_Data = 0x2E;
+ 216              		.loc 1 26 5 view .LVU62
+ 217              		.loc 1 26 13 is_stmt 0 view .LVU63
+ 218 000c 2E23     		movs	r3, #46
+ 219 000e 8DF81730 		strb	r3, [sp, #23]
+  27:Core/Src/bmp180.c ****     uint8_t RAW_TEMP[2] = {0};
+ 220              		.loc 1 27 5 is_stmt 1 view .LVU64
+ 221              		.loc 1 27 13 is_stmt 0 view .LVU65
+ 222 0012 0023     		movs	r3, #0
+ 223 0014 ADF81430 		strh	r3, [sp, #20]	@ movhi
+  28:Core/Src/bmp180.c ****     HAL_I2C_Mem_Write(&hi2c1, BMP180_Address, UT_UP_REG, 1, &Write_Data, 1, HAL_MAX_DELAY);
+ 224              		.loc 1 28 5 is_stmt 1 view .LVU66
+ 225 0018 144D     		ldr	r5, .L7
+ 226 001a 4FF0FF36 		mov	r6, #-1
+ 227 001e 0296     		str	r6, [sp, #8]
+ 228 0020 0124     		movs	r4, #1
+ 229 0022 0194     		str	r4, [sp, #4]
+ 230 0024 0DF11703 		add	r3, sp, #23
+ 231 0028 0093     		str	r3, [sp]
+ 232 002a 2346     		mov	r3, r4
+ 233 002c F422     		movs	r2, #244
+ 234 002e EE21     		movs	r1, #238
+ 235 0030 2846     		mov	r0, r5
+ 236 0032 FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 237              	.LVL2:
+  29:Core/Src/bmp180.c ****     HAL_Delay(5);
+ 238              		.loc 1 29 5 view .LVU67
+ 239 0036 0520     		movs	r0, #5
+ 240 0038 FFF7FEFF 		bl	HAL_Delay
+ 241              	.LVL3:
+  30:Core/Src/bmp180.c ****     HAL_I2C_Mem_Read(&hi2c1, BMP180_Address, UT_UP_READ_REG, 1, RAW_TEMP, 2, HAL_MAX_DELAY);
+ 242              		.loc 1 30 5 view .LVU68
+ 243 003c 0296     		str	r6, [sp, #8]
+ 244 003e 0223     		movs	r3, #2
+ 245 0040 0193     		str	r3, [sp, #4]
+ 246 0042 05AB     		add	r3, sp, #20
+ 247 0044 0093     		str	r3, [sp]
+ 248 0046 2346     		mov	r3, r4
+ 249 0048 F622     		movs	r2, #246
+ 250 004a EE21     		movs	r1, #238
+ 251 004c 2846     		mov	r0, r5
+ 252 004e FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 253              	.LVL4:
+  31:Core/Src/bmp180.c ****     return((RAW_TEMP[0] << 8) + RAW_TEMP[1]);
+ 254              		.loc 1 31 5 view .LVU69
+ 255              		.loc 1 31 21 is_stmt 0 view .LVU70
+ 256 0052 9DF81430 		ldrb	r3, [sp, #20]	@ zero_extendqisi2
+ 257              		.loc 1 31 41 view .LVU71
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 6
+
+
+ 258 0056 9DF81500 		ldrb	r0, [sp, #21]	@ zero_extendqisi2
+ 259              		.loc 1 31 31 view .LVU72
+ 260 005a 00EB0320 		add	r0, r0, r3, lsl #8
+  32:Core/Src/bmp180.c **** }
+ 261              		.loc 1 32 1 view .LVU73
+ 262 005e 80B2     		uxth	r0, r0
+ 263 0060 06B0     		add	sp, sp, #24
+ 264              	.LCFI9:
+ 265              		.cfi_def_cfa_offset 32
+ 266              		@ sp needed
+ 267 0062 BDE87040 		pop	{r4, r5, r6, lr}
+ 268              	.LCFI10:
+ 269              		.cfi_restore 14
+ 270              		.cfi_restore 6
+ 271              		.cfi_restore 5
+ 272              		.cfi_restore 4
+ 273              		.cfi_def_cfa_offset 16
+ 274 0066 04B0     		add	sp, sp, #16
+ 275              	.LCFI11:
+ 276              		.cfi_def_cfa_offset 0
+ 277 0068 7047     		bx	lr
+ 278              	.L8:
+ 279 006a 00BF     		.align	2
+ 280              	.L7:
+ 281 006c 00000000 		.word	hi2c1
+ 282              		.cfi_endproc
+ 283              	.LFE131:
+ 285              		.global	__aeabi_i2d
+ 286              		.global	__aeabi_dmul
+ 287              		.global	__aeabi_d2iz
+ 288              		.global	__aeabi_ddiv
+ 289              		.global	__aeabi_d2f
+ 290              		.section	.text.BMP180_Temperature,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	BMP180_Temperature
+ 293              		.syntax unified
+ 294              		.thumb
+ 295              		.thumb_func
+ 297              	BMP180_Temperature:
+ 298              	.LFB132:
+  33:Core/Src/bmp180.c **** 
+  34:Core/Src/bmp180.c **** float BMP180_Temperature(bmp180_t Data)
+  35:Core/Src/bmp180.c **** {
+ 299              		.loc 1 35 1 is_stmt 1 view -0
+ 300              		.cfi_startproc
+ 301              		@ args = 76, pretend = 16, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303 0000 84B0     		sub	sp, sp, #16
+ 304              	.LCFI12:
+ 305              		.cfi_def_cfa_offset 16
+ 306 0002 D0B5     		push	{r4, r6, r7, lr}
+ 307              	.LCFI13:
+ 308              		.cfi_def_cfa_offset 32
+ 309              		.cfi_offset 4, -32
+ 310              		.cfi_offset 6, -28
+ 311              		.cfi_offset 7, -24
+ 312              		.cfi_offset 14, -20
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 7
+
+
+ 313 0004 90B0     		sub	sp, sp, #64
+ 314              	.LCFI14:
+ 315              		.cfi_def_cfa_offset 96
+ 316 0006 14AC     		add	r4, sp, #80
+ 317 0008 84E80F00 		stm	r4, {r0, r1, r2, r3}
+  36:Core/Src/bmp180.c ****     Data.UT = Read_UT(Data);
+ 318              		.loc 1 36 5 view .LVU75
+ 319              		.loc 1 36 15 is_stmt 0 view .LVU76
+ 320 000c EC46     		mov	ip, sp
+ 321 000e 0DF1600E 		add	lr, sp, #96
+ 322 0012 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 323 0016 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 324 001a BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 325 001e ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 326 0022 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 327 0026 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 328 002a 9EE80700 		ldm	lr, {r0, r1, r2}
+ 329 002e 8CE80700 		stm	ip, {r0, r1, r2}
+ 330 0032 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 331 0036 FFF7FEFF 		bl	Read_UT
+ 332              	.LVL5:
+ 333              		.loc 1 36 13 view .LVU77
+ 334 003a 1A90     		str	r0, [sp, #104]
+  37:Core/Src/bmp180.c ****     Data.X1 = ((Data.UT - Data.AC6) * (Data.AC5/(pow(2,15))));
+ 335              		.loc 1 37 5 is_stmt 1 view .LVU78
+ 336              		.loc 1 37 31 is_stmt 0 view .LVU79
+ 337 003c BDF85A30 		ldrh	r3, [sp, #90]
+ 338              		.loc 1 37 25 view .LVU80
+ 339 0040 C41A     		subs	r4, r0, r3
+ 340              		.loc 1 37 48 view .LVU81
+ 341 0042 BDF85800 		ldrh	r0, [sp, #88]
+ 342 0046 FFF7FEFF 		bl	__aeabi_i2d
+ 343              	.LVL6:
+ 344 004a 0022     		movs	r2, #0
+ 345 004c 4FF07C53 		mov	r3, #1056964608
+ 346 0050 FFF7FEFF 		bl	__aeabi_dmul
+ 347              	.LVL7:
+ 348 0054 0646     		mov	r6, r0
+ 349 0056 0F46     		mov	r7, r1
+ 350              		.loc 1 37 37 view .LVU82
+ 351 0058 2046     		mov	r0, r4
+ 352 005a FFF7FEFF 		bl	__aeabi_i2d
+ 353              	.LVL8:
+ 354 005e 3246     		mov	r2, r6
+ 355 0060 3B46     		mov	r3, r7
+ 356 0062 FFF7FEFF 		bl	__aeabi_dmul
+ 357              	.LVL9:
+ 358              		.loc 1 37 13 view .LVU83
+ 359 0066 FFF7FEFF 		bl	__aeabi_d2iz
+ 360              	.LVL10:
+ 361 006a 0446     		mov	r4, r0
+ 362 006c 1C90     		str	r0, [sp, #112]
+  38:Core/Src/bmp180.c ****     Data.X2 = ((Data.MC*(pow(2,11))) / (Data.X1 + Data.MD));
+ 363              		.loc 1 38 5 is_stmt 1 view .LVU84
+ 364              		.loc 1 38 24 is_stmt 0 view .LVU85
+ 365 006e BDF96200 		ldrsh	r0, [sp, #98]
+ 366 0072 FFF7FEFF 		bl	__aeabi_i2d
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 8
+
+
+ 367              	.LVL11:
+ 368 0076 0022     		movs	r2, #0
+ 369 0078 164B     		ldr	r3, .L11
+ 370 007a FFF7FEFF 		bl	__aeabi_dmul
+ 371              	.LVL12:
+ 372 007e 0646     		mov	r6, r0
+ 373 0080 0F46     		mov	r7, r1
+ 374              		.loc 1 38 55 view .LVU86
+ 375 0082 BDF96400 		ldrsh	r0, [sp, #100]
+ 376              		.loc 1 38 38 view .LVU87
+ 377 0086 2044     		add	r0, r0, r4
+ 378 0088 FFF7FEFF 		bl	__aeabi_i2d
+ 379              	.LVL13:
+ 380 008c 0246     		mov	r2, r0
+ 381 008e 0B46     		mov	r3, r1
+ 382 0090 3046     		mov	r0, r6
+ 383 0092 3946     		mov	r1, r7
+ 384 0094 FFF7FEFF 		bl	__aeabi_ddiv
+ 385              	.LVL14:
+ 386              		.loc 1 38 13 view .LVU88
+ 387 0098 FFF7FEFF 		bl	__aeabi_d2iz
+ 388              	.LVL15:
+ 389 009c 1D90     		str	r0, [sp, #116]
+  39:Core/Src/bmp180.c ****     Data.B5 = Data.X1 + Data.X2;
+ 390              		.loc 1 39 5 is_stmt 1 view .LVU89
+ 391              		.loc 1 39 23 is_stmt 0 view .LVU90
+ 392 009e 2044     		add	r0, r0, r4
+ 393              		.loc 1 39 13 view .LVU91
+ 394 00a0 2090     		str	r0, [sp, #128]
+  40:Core/Src/bmp180.c ****     Data.Temperature = (Data.B5+8)/(pow(2,4));
+ 395              		.loc 1 40 5 is_stmt 1 view .LVU92
+ 396              		.loc 1 40 35 is_stmt 0 view .LVU93
+ 397 00a2 0830     		adds	r0, r0, #8
+ 398 00a4 FFF7FEFF 		bl	__aeabi_i2d
+ 399              	.LVL16:
+ 400 00a8 0022     		movs	r2, #0
+ 401 00aa 0B4B     		ldr	r3, .L11+4
+ 402 00ac FFF7FEFF 		bl	__aeabi_dmul
+ 403              	.LVL17:
+ 404              		.loc 1 40 22 view .LVU94
+ 405 00b0 FFF7FEFF 		bl	__aeabi_d2iz
+ 406              	.LVL18:
+ 407 00b4 2590     		str	r0, [sp, #148]
+  41:Core/Src/bmp180.c ****     return Data.Temperature/10.0;
+ 408              		.loc 1 41 5 is_stmt 1 view .LVU95
+ 409              		.loc 1 41 28 is_stmt 0 view .LVU96
+ 410 00b6 FFF7FEFF 		bl	__aeabi_i2d
+ 411              	.LVL19:
+ 412 00ba 0022     		movs	r2, #0
+ 413 00bc 074B     		ldr	r3, .L11+8
+ 414 00be FFF7FEFF 		bl	__aeabi_ddiv
+ 415              	.LVL20:
+ 416 00c2 FFF7FEFF 		bl	__aeabi_d2f
+ 417              	.LVL21:
+  42:Core/Src/bmp180.c **** }
+ 418              		.loc 1 42 1 view .LVU97
+ 419 00c6 00EE100A 		vmov	s0, r0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 9
+
+
+ 420 00ca 10B0     		add	sp, sp, #64
+ 421              	.LCFI15:
+ 422              		.cfi_def_cfa_offset 32
+ 423              		@ sp needed
+ 424 00cc BDE8D040 		pop	{r4, r6, r7, lr}
+ 425              	.LCFI16:
+ 426              		.cfi_restore 14
+ 427              		.cfi_restore 7
+ 428              		.cfi_restore 6
+ 429              		.cfi_restore 4
+ 430              		.cfi_def_cfa_offset 16
+ 431 00d0 04B0     		add	sp, sp, #16
+ 432              	.LCFI17:
+ 433              		.cfi_def_cfa_offset 0
+ 434 00d2 7047     		bx	lr
+ 435              	.L12:
+ 436              		.align	2
+ 437              	.L11:
+ 438 00d4 0000A040 		.word	1084227584
+ 439 00d8 0000B03F 		.word	1068498944
+ 440 00dc 00002440 		.word	1076101120
+ 441              		.cfi_endproc
+ 442              	.LFE132:
+ 444              		.section	.text.Read_UP,"ax",%progbits
+ 445              		.align	1
+ 446              		.global	Read_UP
+ 447              		.syntax unified
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	Read_UP:
+ 452              	.LVL22:
+ 453              	.LFB133:
+  43:Core/Src/bmp180.c **** 
+  44:Core/Src/bmp180.c **** uint32_t Read_UP(int oss)
+  45:Core/Src/bmp180.c **** {
+ 454              		.loc 1 45 1 is_stmt 1 view -0
+ 455              		.cfi_startproc
+ 456              		@ args = 0, pretend = 0, frame = 8
+ 457              		@ frame_needed = 0, uses_anonymous_args = 0
+ 458              		.loc 1 45 1 is_stmt 0 view .LVU99
+ 459 0000 10B5     		push	{r4, lr}
+ 460              	.LCFI18:
+ 461              		.cfi_def_cfa_offset 8
+ 462              		.cfi_offset 4, -8
+ 463              		.cfi_offset 14, -4
+ 464 0002 86B0     		sub	sp, sp, #24
+ 465              	.LCFI19:
+ 466              		.cfi_def_cfa_offset 32
+ 467 0004 0446     		mov	r4, r0
+  46:Core/Src/bmp180.c ****     uint8_t Write_Data = 0x34 + (oss << 6);
+ 468              		.loc 1 46 5 is_stmt 1 view .LVU100
+ 469              		.loc 1 46 38 is_stmt 0 view .LVU101
+ 470 0006 8301     		lsls	r3, r0, #6
+ 471 0008 DBB2     		uxtb	r3, r3
+ 472              		.loc 1 46 31 view .LVU102
+ 473 000a 3433     		adds	r3, r3, #52
+ 474              		.loc 1 46 13 view .LVU103
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 10
+
+
+ 475 000c 8DF81730 		strb	r3, [sp, #23]
+  47:Core/Src/bmp180.c ****     uint8_t RAW_PRESS[3] = {0};
+ 476              		.loc 1 47 5 is_stmt 1 view .LVU104
+ 477              		.loc 1 47 13 is_stmt 0 view .LVU105
+ 478 0010 214B     		ldr	r3, .L24
+ 479 0012 1B88     		ldrh	r3, [r3]
+ 480 0014 ADF81430 		strh	r3, [sp, #20]	@ movhi
+ 481 0018 0023     		movs	r3, #0
+ 482 001a 8DF81630 		strb	r3, [sp, #22]
+  48:Core/Src/bmp180.c ****     HAL_I2C_Mem_Read(&hi2c1, BMP180_Address, UT_UP_REG, 1, &Write_Data, 1, HAL_MAX_DELAY);
+ 483              		.loc 1 48 5 is_stmt 1 view .LVU106
+ 484 001e 4FF0FF33 		mov	r3, #-1
+ 485 0022 0293     		str	r3, [sp, #8]
+ 486 0024 0123     		movs	r3, #1
+ 487 0026 0193     		str	r3, [sp, #4]
+ 488 0028 0DF11702 		add	r2, sp, #23
+ 489 002c 0092     		str	r2, [sp]
+ 490 002e F422     		movs	r2, #244
+ 491 0030 EE21     		movs	r1, #238
+ 492 0032 1A48     		ldr	r0, .L24+4
+ 493              	.LVL23:
+ 494              		.loc 1 48 5 is_stmt 0 view .LVU107
+ 495 0034 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 496              	.LVL24:
+  49:Core/Src/bmp180.c ****     switch (oss)
+ 497              		.loc 1 49 5 is_stmt 1 view .LVU108
+ 498 0038 032C     		cmp	r4, #3
+ 499 003a 10D8     		bhi	.L14
+ 500 003c DFE804F0 		tbb	[pc, r4]
+ 501              	.L16:
+ 502 0040 02       		.byte	(.L19-.L16)/2
+ 503 0041 06       		.byte	(.L18-.L16)/2
+ 504 0042 09       		.byte	(.L17-.L16)/2
+ 505 0043 0C       		.byte	(.L15-.L16)/2
+ 506              		.p2align 1
+ 507              	.L19:
+  50:Core/Src/bmp180.c ****     {
+  51:Core/Src/bmp180.c ****     case (0):
+  52:Core/Src/bmp180.c ****         HAL_Delay(5);
+ 508              		.loc 1 52 9 view .LVU109
+ 509 0044 0520     		movs	r0, #5
+ 510 0046 FFF7FEFF 		bl	HAL_Delay
+ 511              	.LVL25:
+  53:Core/Src/bmp180.c ****         break;
+ 512              		.loc 1 53 9 view .LVU110
+ 513 004a 08E0     		b	.L14
+ 514              	.L18:
+  54:Core/Src/bmp180.c ****     case (1):
+  55:Core/Src/bmp180.c ****         HAL_Delay(8);
+ 515              		.loc 1 55 9 view .LVU111
+ 516 004c 0820     		movs	r0, #8
+ 517 004e FFF7FEFF 		bl	HAL_Delay
+ 518              	.LVL26:
+ 519              	.L17:
+  56:Core/Src/bmp180.c ****     case (2):
+  57:Core/Src/bmp180.c ****         HAL_Delay(14);
+ 520              		.loc 1 57 9 view .LVU112
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 11
+
+
+ 521 0052 0E20     		movs	r0, #14
+ 522 0054 FFF7FEFF 		bl	HAL_Delay
+ 523              	.LVL27:
+ 524              	.L15:
+  58:Core/Src/bmp180.c ****     case (3):
+  59:Core/Src/bmp180.c ****         HAL_Delay(26);
+ 525              		.loc 1 59 9 view .LVU113
+ 526 0058 1A20     		movs	r0, #26
+ 527 005a FFF7FEFF 		bl	HAL_Delay
+ 528              	.LVL28:
+ 529              	.L14:
+  60:Core/Src/bmp180.c ****     }
+  61:Core/Src/bmp180.c ****     HAL_I2C_Mem_Read(&hi2c1, BMP180_Address, UT_UP_READ_REG, 1, RAW_PRESS, 3, HAL_MAX_DELAY);
+ 530              		.loc 1 61 5 view .LVU114
+ 531 005e 4FF0FF33 		mov	r3, #-1
+ 532 0062 0293     		str	r3, [sp, #8]
+ 533 0064 0323     		movs	r3, #3
+ 534 0066 0193     		str	r3, [sp, #4]
+ 535 0068 05AB     		add	r3, sp, #20
+ 536 006a 0093     		str	r3, [sp]
+ 537 006c 0123     		movs	r3, #1
+ 538 006e F622     		movs	r2, #246
+ 539 0070 EE21     		movs	r1, #238
+ 540 0072 0A48     		ldr	r0, .L24+4
+ 541 0074 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 542              	.LVL29:
+  62:Core/Src/bmp180.c ****     return (((RAW_PRESS[0]<<16) + (RAW_PRESS[1]<<8) + RAW_PRESS[2]) >> (8 - oss));
+ 543              		.loc 1 62 5 view .LVU115
+ 544              		.loc 1 62 24 is_stmt 0 view .LVU116
+ 545 0078 9DF81420 		ldrb	r2, [sp, #20]	@ zero_extendqisi2
+ 546              		.loc 1 62 45 view .LVU117
+ 547 007c 9DF81530 		ldrb	r3, [sp, #21]	@ zero_extendqisi2
+ 548              		.loc 1 62 48 view .LVU118
+ 549 0080 1B02     		lsls	r3, r3, #8
+ 550              		.loc 1 62 33 view .LVU119
+ 551 0082 03EB0243 		add	r3, r3, r2, lsl #16
+ 552              		.loc 1 62 64 view .LVU120
+ 553 0086 9DF81620 		ldrb	r2, [sp, #22]	@ zero_extendqisi2
+ 554              		.loc 1 62 53 view .LVU121
+ 555 008a 1344     		add	r3, r3, r2
+ 556              		.loc 1 62 75 view .LVU122
+ 557 008c C4F10800 		rsb	r0, r4, #8
+  63:Core/Src/bmp180.c **** }
+ 558              		.loc 1 63 1 view .LVU123
+ 559 0090 43FA00F0 		asr	r0, r3, r0
+ 560 0094 06B0     		add	sp, sp, #24
+ 561              	.LCFI20:
+ 562              		.cfi_def_cfa_offset 8
+ 563              		@ sp needed
+ 564 0096 10BD     		pop	{r4, pc}
+ 565              	.LVL30:
+ 566              	.L25:
+ 567              		.loc 1 63 1 view .LVU124
+ 568              		.align	2
+ 569              	.L24:
+ 570 0098 00000000 		.word	.LANCHOR0
+ 571 009c 00000000 		.word	hi2c1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 12
+
+
+ 572              		.cfi_endproc
+ 573              	.LFE133:
+ 575              		.global	__aeabi_ui2d
+ 576              		.global	__aeabi_d2uiz
+ 577              		.global	__aeabi_dadd
+ 578              		.section	.text.BMP180_Pressure,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	BMP180_Pressure
+ 581              		.syntax unified
+ 582              		.thumb
+ 583              		.thumb_func
+ 585              	BMP180_Pressure:
+ 586              	.LVL31:
+ 587              	.LFB134:
+  64:Core/Src/bmp180.c **** 
+  65:Core/Src/bmp180.c **** float BMP180_Pressure(bmp180_t Data, int oss)
+  66:Core/Src/bmp180.c **** {
+ 588              		.loc 1 66 1 is_stmt 1 view -0
+ 589              		.cfi_startproc
+ 590              		@ args = 80, pretend = 16, frame = 0
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592              		.loc 1 66 1 is_stmt 0 view .LVU126
+ 593 0000 84B0     		sub	sp, sp, #16
+ 594              	.LCFI21:
+ 595              		.cfi_def_cfa_offset 16
+ 596 0002 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 597              	.LCFI22:
+ 598              		.cfi_def_cfa_offset 48
+ 599              		.cfi_offset 4, -48
+ 600              		.cfi_offset 5, -44
+ 601              		.cfi_offset 6, -40
+ 602              		.cfi_offset 7, -36
+ 603              		.cfi_offset 8, -32
+ 604              		.cfi_offset 9, -28
+ 605              		.cfi_offset 10, -24
+ 606              		.cfi_offset 14, -20
+ 607 0006 2DED028B 		vpush.64	{d8}
+ 608              	.LCFI23:
+ 609              		.cfi_def_cfa_offset 56
+ 610              		.cfi_offset 80, -56
+ 611              		.cfi_offset 81, -52
+ 612 000a 0AAC     		add	r4, sp, #40
+ 613 000c 84E80F00 		stm	r4, {r0, r1, r2, r3}
+ 614 0010 1D9F     		ldr	r7, [sp, #116]
+  67:Core/Src/bmp180.c ****     Data.UP = Read_UP(oss);
+ 615              		.loc 1 67 5 is_stmt 1 view .LVU127
+ 616              		.loc 1 67 15 is_stmt 0 view .LVU128
+ 617 0012 3846     		mov	r0, r7
+ 618 0014 FFF7FEFF 		bl	Read_UP
+ 619              	.LVL32:
+ 620 0018 0546     		mov	r5, r0
+ 621              		.loc 1 67 13 view .LVU129
+ 622 001a 1190     		str	r0, [sp, #68]
+  68:Core/Src/bmp180.c ****     Data.X1 = ((Data.UT - Data.AC6) * (Data.AC5/(pow(2,15))));
+ 623              		.loc 1 68 5 is_stmt 1 view .LVU130
+ 624              		.loc 1 68 31 is_stmt 0 view .LVU131
+ 625 001c BDF83230 		ldrh	r3, [sp, #50]
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 13
+
+
+ 626              		.loc 1 68 25 view .LVU132
+ 627 0020 109C     		ldr	r4, [sp, #64]
+ 628 0022 E41A     		subs	r4, r4, r3
+ 629              		.loc 1 68 48 view .LVU133
+ 630 0024 BDF83000 		ldrh	r0, [sp, #48]
+ 631 0028 FFF7FEFF 		bl	__aeabi_i2d
+ 632              	.LVL33:
+ 633 002c 0022     		movs	r2, #0
+ 634 002e 4FF07C53 		mov	r3, #1056964608
+ 635 0032 FFF7FEFF 		bl	__aeabi_dmul
+ 636              	.LVL34:
+ 637 0036 8046     		mov	r8, r0
+ 638 0038 8946     		mov	r9, r1
+ 639              		.loc 1 68 37 view .LVU134
+ 640 003a 2046     		mov	r0, r4
+ 641 003c FFF7FEFF 		bl	__aeabi_i2d
+ 642              	.LVL35:
+ 643 0040 4246     		mov	r2, r8
+ 644 0042 4B46     		mov	r3, r9
+ 645 0044 FFF7FEFF 		bl	__aeabi_dmul
+ 646              	.LVL36:
+ 647              		.loc 1 68 13 view .LVU135
+ 648 0048 FFF7FEFF 		bl	__aeabi_d2iz
+ 649              	.LVL37:
+ 650 004c 0646     		mov	r6, r0
+ 651 004e 1290     		str	r0, [sp, #72]
+  69:Core/Src/bmp180.c ****     Data.X2 = ((Data.MC *(pow(2,11)))) / (Data.X1 + Data.MD);
+ 652              		.loc 1 69 5 is_stmt 1 view .LVU136
+ 653              		.loc 1 69 25 is_stmt 0 view .LVU137
+ 654 0050 BDF93A00 		ldrsh	r0, [sp, #58]
+ 655 0054 FFF7FEFF 		bl	__aeabi_i2d
+ 656              	.LVL38:
+ 657 0058 0022     		movs	r2, #0
+ 658 005a 834B     		ldr	r3, .L32+8
+ 659 005c FFF7FEFF 		bl	__aeabi_dmul
+ 660              	.LVL39:
+ 661 0060 8046     		mov	r8, r0
+ 662 0062 8946     		mov	r9, r1
+ 663              		.loc 1 69 57 view .LVU138
+ 664 0064 BDF93C00 		ldrsh	r0, [sp, #60]
+ 665              		.loc 1 69 40 view .LVU139
+ 666 0068 3044     		add	r0, r0, r6
+ 667 006a FFF7FEFF 		bl	__aeabi_i2d
+ 668              	.LVL40:
+ 669 006e 0246     		mov	r2, r0
+ 670 0070 0B46     		mov	r3, r1
+ 671 0072 4046     		mov	r0, r8
+ 672 0074 4946     		mov	r1, r9
+ 673 0076 FFF7FEFF 		bl	__aeabi_ddiv
+ 674              	.LVL41:
+ 675              		.loc 1 69 13 view .LVU140
+ 676 007a FFF7FEFF 		bl	__aeabi_d2iz
+ 677              	.LVL42:
+ 678 007e 1390     		str	r0, [sp, #76]
+  70:Core/Src/bmp180.c ****     Data.B5 = Data.X1 + Data.X2; 
+ 679              		.loc 1 70 5 is_stmt 1 view .LVU141
+ 680              		.loc 1 70 23 is_stmt 0 view .LVU142
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 14
+
+
+ 681 0080 0644     		add	r6, r6, r0
+ 682              		.loc 1 70 13 view .LVU143
+ 683 0082 1696     		str	r6, [sp, #88]
+  71:Core/Src/bmp180.c ****     Data.B6 = Data.B5 - 4000;
+ 684              		.loc 1 71 5 is_stmt 1 view .LVU144
+ 685              		.loc 1 71 23 is_stmt 0 view .LVU145
+ 686 0084 A6F57A66 		sub	r6, r6, #4000
+ 687              		.loc 1 71 13 view .LVU146
+ 688 0088 1896     		str	r6, [sp, #96]
+  72:Core/Src/bmp180.c ****     Data.X1 = (Data.B2 * ((pow(Data.B6,2))/(pow(2,12)))) / (pow(2,11));
+ 689              		.loc 1 72 5 is_stmt 1 view .LVU147
+ 690              		.loc 1 72 20 is_stmt 0 view .LVU148
+ 691 008a BDF93640 		ldrsh	r4, [sp, #54]
+ 692              		.loc 1 72 28 view .LVU149
+ 693 008e 3046     		mov	r0, r6
+ 694 0090 FFF7FEFF 		bl	__aeabi_i2d
+ 695              	.LVL43:
+ 696 0094 41EC180B 		vmov	d8, r0, r1
+ 697 0098 9FED711B 		vldr.64	d1, .L32
+ 698 009c B0EE480A 		vmov.f32	s0, s16
+ 699 00a0 F0EE680A 		vmov.f32	s1, s17
+ 700 00a4 FFF7FEFF 		bl	pow
+ 701              	.LVL44:
+ 702 00a8 51EC100B 		vmov	r0, r1, d0
+ 703              		.loc 1 72 43 view .LVU150
+ 704 00ac 0022     		movs	r2, #0
+ 705 00ae 6F4B     		ldr	r3, .L32+12
+ 706 00b0 FFF7FEFF 		bl	__aeabi_dmul
+ 707              	.LVL45:
+ 708 00b4 8046     		mov	r8, r0
+ 709 00b6 8946     		mov	r9, r1
+ 710              		.loc 1 72 24 view .LVU151
+ 711 00b8 2046     		mov	r0, r4
+ 712 00ba FFF7FEFF 		bl	__aeabi_i2d
+ 713              	.LVL46:
+ 714 00be 4246     		mov	r2, r8
+ 715 00c0 4B46     		mov	r3, r9
+ 716 00c2 FFF7FEFF 		bl	__aeabi_dmul
+ 717              	.LVL47:
+ 718              		.loc 1 72 58 view .LVU152
+ 719 00c6 0022     		movs	r2, #0
+ 720 00c8 4FF07D53 		mov	r3, #1061158912
+ 721 00cc FFF7FEFF 		bl	__aeabi_dmul
+ 722              	.LVL48:
+ 723              		.loc 1 72 13 view .LVU153
+ 724 00d0 FFF7FEFF 		bl	__aeabi_d2iz
+ 725              	.LVL49:
+ 726 00d4 0446     		mov	r4, r0
+ 727 00d6 1290     		str	r0, [sp, #72]
+  73:Core/Src/bmp180.c ****     Data.X2 = Data.AC2 * Data.B6/ (pow(2,11));
+ 728              		.loc 1 73 5 is_stmt 1 view .LVU154
+ 729              		.loc 1 73 19 is_stmt 0 view .LVU155
+ 730 00d8 BDF92A00 		ldrsh	r0, [sp, #42]
+ 731              		.loc 1 73 33 view .LVU156
+ 732 00dc 06FB00F0 		mul	r0, r6, r0
+ 733 00e0 FFF7FEFF 		bl	__aeabi_i2d
+ 734              	.LVL50:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 15
+
+
+ 735 00e4 0022     		movs	r2, #0
+ 736 00e6 4FF07D53 		mov	r3, #1061158912
+ 737 00ea FFF7FEFF 		bl	__aeabi_dmul
+ 738              	.LVL51:
+ 739              		.loc 1 73 13 view .LVU157
+ 740 00ee FFF7FEFF 		bl	__aeabi_d2iz
+ 741              	.LVL52:
+ 742 00f2 1390     		str	r0, [sp, #76]
+  74:Core/Src/bmp180.c ****     Data.X3 = Data.X1 + Data.X2; 
+ 743              		.loc 1 74 5 is_stmt 1 view .LVU158
+ 744              		.loc 1 74 23 is_stmt 0 view .LVU159
+ 745 00f4 0444     		add	r4, r4, r0
+ 746              		.loc 1 74 13 view .LVU160
+ 747 00f6 1494     		str	r4, [sp, #80]
+  75:Core/Src/bmp180.c ****     Data.B3 = (((Data.AC1*4 + Data.X3) << oss) + 2) / 4;
+ 748              		.loc 1 75 5 is_stmt 1 view .LVU161
+ 749              		.loc 1 75 22 is_stmt 0 view .LVU162
+ 750 00f8 BDF92830 		ldrsh	r3, [sp, #40]
+ 751              		.loc 1 75 29 view .LVU163
+ 752 00fc 04EB8304 		add	r4, r4, r3, lsl #2
+ 753              		.loc 1 75 40 view .LVU164
+ 754 0100 BC40     		lsls	r4, r4, r7
+ 755              		.loc 1 75 53 view .LVU165
+ 756 0102 0234     		adds	r4, r4, #2
+ 757 0104 00F1A580 		bmi	.L31
+ 758              	.L27:
+ 759 0108 A410     		asrs	r4, r4, #2
+ 760              		.loc 1 75 13 view .LVU166
+ 761 010a 1594     		str	r4, [sp, #84]
+  76:Core/Src/bmp180.c ****     Data.X1 = Data.AC3 * Data.B6/pow(2,13);
+ 762              		.loc 1 76 5 is_stmt 1 view .LVU167
+ 763              		.loc 1 76 19 is_stmt 0 view .LVU168
+ 764 010c BDF92C00 		ldrsh	r0, [sp, #44]
+ 765              		.loc 1 76 33 view .LVU169
+ 766 0110 06FB00F0 		mul	r0, r6, r0
+ 767 0114 FFF7FEFF 		bl	__aeabi_i2d
+ 768              	.LVL53:
+ 769 0118 0022     		movs	r2, #0
+ 770 011a 554B     		ldr	r3, .L32+16
+ 771 011c FFF7FEFF 		bl	__aeabi_dmul
+ 772              	.LVL54:
+ 773              		.loc 1 76 13 view .LVU170
+ 774 0120 FFF7FEFF 		bl	__aeabi_d2iz
+ 775              	.LVL55:
+ 776 0124 0646     		mov	r6, r0
+ 777 0126 1290     		str	r0, [sp, #72]
+  77:Core/Src/bmp180.c ****     Data.X2 = (Data.B1 * ((pow(Data.B6,2)) / (pow(2,12))))/ (pow(2,16));
+ 778              		.loc 1 77 5 is_stmt 1 view .LVU171
+ 779              		.loc 1 77 20 is_stmt 0 view .LVU172
+ 780 0128 BDF934A0 		ldrsh	r10, [sp, #52]
+ 781              		.loc 1 77 28 view .LVU173
+ 782 012c 9FED4C1B 		vldr.64	d1, .L32
+ 783 0130 B0EE480A 		vmov.f32	s0, s16
+ 784 0134 F0EE680A 		vmov.f32	s1, s17
+ 785 0138 FFF7FEFF 		bl	pow
+ 786              	.LVL56:
+ 787 013c 51EC100B 		vmov	r0, r1, d0
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 16
+
+
+ 788              		.loc 1 77 44 view .LVU174
+ 789 0140 0022     		movs	r2, #0
+ 790 0142 4A4B     		ldr	r3, .L32+12
+ 791 0144 FFF7FEFF 		bl	__aeabi_dmul
+ 792              	.LVL57:
+ 793 0148 8046     		mov	r8, r0
+ 794 014a 8946     		mov	r9, r1
+ 795              		.loc 1 77 24 view .LVU175
+ 796 014c 5046     		mov	r0, r10
+ 797 014e FFF7FEFF 		bl	__aeabi_i2d
+ 798              	.LVL58:
+ 799 0152 4246     		mov	r2, r8
+ 800 0154 4B46     		mov	r3, r9
+ 801 0156 FFF7FEFF 		bl	__aeabi_dmul
+ 802              	.LVL59:
+ 803              		.loc 1 77 59 view .LVU176
+ 804 015a 0022     		movs	r2, #0
+ 805 015c 454B     		ldr	r3, .L32+20
+ 806 015e FFF7FEFF 		bl	__aeabi_dmul
+ 807              	.LVL60:
+ 808              		.loc 1 77 13 view .LVU177
+ 809 0162 FFF7FEFF 		bl	__aeabi_d2iz
+ 810              	.LVL61:
+ 811 0166 1390     		str	r0, [sp, #76]
+  78:Core/Src/bmp180.c ****     Data.X3 = ((Data.X1 + Data.X2) + 2)/(pow(2,2));
+ 812              		.loc 1 78 5 is_stmt 1 view .LVU178
+ 813              		.loc 1 78 25 is_stmt 0 view .LVU179
+ 814 0168 3044     		add	r0, r0, r6
+ 815              		.loc 1 78 40 view .LVU180
+ 816 016a 0230     		adds	r0, r0, #2
+ 817 016c FFF7FEFF 		bl	__aeabi_i2d
+ 818              	.LVL62:
+ 819 0170 0022     		movs	r2, #0
+ 820 0172 414B     		ldr	r3, .L32+24
+ 821 0174 FFF7FEFF 		bl	__aeabi_dmul
+ 822              	.LVL63:
+ 823              		.loc 1 78 13 view .LVU181
+ 824 0178 FFF7FEFF 		bl	__aeabi_d2iz
+ 825              	.LVL64:
+ 826 017c 1490     		str	r0, [sp, #80]
+  79:Core/Src/bmp180.c ****     Data.B4 = Data.AC4 * (unsigned long)(Data.X3 + 32768)/(pow(2,15));
+ 827              		.loc 1 79 5 is_stmt 1 view .LVU182
+ 828              		.loc 1 79 19 is_stmt 0 view .LVU183
+ 829 017e BDF82E30 		ldrh	r3, [sp, #46]
+ 830              		.loc 1 79 50 view .LVU184
+ 831 0182 00F50040 		add	r0, r0, #32768
+ 832              		.loc 1 79 58 view .LVU185
+ 833 0186 03FB00F0 		mul	r0, r3, r0
+ 834 018a FFF7FEFF 		bl	__aeabi_ui2d
+ 835              	.LVL65:
+ 836 018e 0022     		movs	r2, #0
+ 837 0190 4FF07C53 		mov	r3, #1056964608
+ 838 0194 FFF7FEFF 		bl	__aeabi_dmul
+ 839              	.LVL66:
+ 840              		.loc 1 79 13 view .LVU186
+ 841 0198 FFF7FEFF 		bl	__aeabi_d2uiz
+ 842              	.LVL67:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 17
+
+
+ 843 019c 1790     		str	r0, [sp, #92]
+  80:Core/Src/bmp180.c ****     Data.B7 = ((unsigned long)Data.UP - Data.B3) * (50000 >> oss);
+ 844              		.loc 1 80 5 is_stmt 1 view .LVU187
+ 845              		.loc 1 80 39 is_stmt 0 view .LVU188
+ 846 019e 2D1B     		subs	r5, r5, r4
+ 847              		.loc 1 80 59 view .LVU189
+ 848 01a0 4CF25033 		movw	r3, #50000
+ 849 01a4 3B41     		asrs	r3, r3, r7
+ 850              		.loc 1 80 50 view .LVU190
+ 851 01a6 03FB05F5 		mul	r5, r3, r5
+ 852              		.loc 1 80 13 view .LVU191
+ 853 01aa 1995     		str	r5, [sp, #100]
+  81:Core/Src/bmp180.c ****     if (Data.B7 < 0x80000000) Data.Pressure = (Data.B7 * 2)/ Data.B4;
+ 854              		.loc 1 81 5 is_stmt 1 view .LVU192
+ 855              		.loc 1 81 8 is_stmt 0 view .LVU193
+ 856 01ac 002D     		cmp	r5, #0
+ 857 01ae 52DB     		blt	.L28
+ 858              		.loc 1 81 31 is_stmt 1 discriminator 1 view .LVU194
+ 859              		.loc 1 81 56 is_stmt 0 discriminator 1 view .LVU195
+ 860 01b0 6D00     		lsls	r5, r5, #1
+ 861              		.loc 1 81 60 discriminator 1 view .LVU196
+ 862 01b2 B5FBF0F0 		udiv	r0, r5, r0
+ 863              		.loc 1 81 45 discriminator 1 view .LVU197
+ 864 01b6 1A90     		str	r0, [sp, #104]
+ 865              	.L29:
+  82:Core/Src/bmp180.c ****     else Data.Pressure = (Data.B7 / Data.B4)* 2;
+  83:Core/Src/bmp180.c ****     Data.X1 = pow((Data.Pressure/(pow(2,8))),(Data.Pressure/(pow(2,8))));
+ 866              		.loc 1 83 5 is_stmt 1 view .LVU198
+ 867              		.loc 1 83 24 is_stmt 0 view .LVU199
+ 868 01b8 1A9D     		ldr	r5, [sp, #104]
+ 869              		.loc 1 83 15 view .LVU200
+ 870 01ba 2846     		mov	r0, r5
+ 871 01bc FFF7FEFF 		bl	__aeabi_i2d
+ 872              	.LVL68:
+ 873 01c0 0646     		mov	r6, r0
+ 874 01c2 0F46     		mov	r7, r1
+ 875 01c4 0022     		movs	r2, #0
+ 876 01c6 2D4B     		ldr	r3, .L32+28
+ 877 01c8 FFF7FEFF 		bl	__aeabi_dmul
+ 878              	.LVL69:
+ 879 01cc 41EC100B 		vmov	d0, r0, r1
+ 880 01d0 B0EE401A 		vmov.f32	s2, s0
+ 881 01d4 F0EE601A 		vmov.f32	s3, s1
+ 882 01d8 FFF7FEFF 		bl	pow
+ 883              	.LVL70:
+ 884 01dc 51EC100B 		vmov	r0, r1, d0
+ 885              		.loc 1 83 13 view .LVU201
+ 886 01e0 FFF7FEFF 		bl	__aeabi_d2iz
+ 887              	.LVL71:
+ 888 01e4 1290     		str	r0, [sp, #72]
+  84:Core/Src/bmp180.c ****     Data.X1 = (Data.X1 * 3038)/pow(2,16);
+ 889              		.loc 1 84 5 is_stmt 1 view .LVU202
+ 890              		.loc 1 84 31 is_stmt 0 view .LVU203
+ 891 01e6 40F6DE33 		movw	r3, #3038
+ 892 01ea 03FB00F0 		mul	r0, r3, r0
+ 893 01ee FFF7FEFF 		bl	__aeabi_i2d
+ 894              	.LVL72:
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 18
+
+
+ 895 01f2 0022     		movs	r2, #0
+ 896 01f4 1F4B     		ldr	r3, .L32+20
+ 897 01f6 FFF7FEFF 		bl	__aeabi_dmul
+ 898              	.LVL73:
+ 899              		.loc 1 84 13 view .LVU204
+ 900 01fa FFF7FEFF 		bl	__aeabi_d2iz
+ 901              	.LVL74:
+ 902 01fe 0446     		mov	r4, r0
+ 903 0200 1290     		str	r0, [sp, #72]
+  85:Core/Src/bmp180.c ****     Data.X2 = (-7357 * Data.Pressure)/(pow(2,16));
+ 904              		.loc 1 85 5 is_stmt 1 view .LVU205
+ 905              		.loc 1 85 38 is_stmt 0 view .LVU206
+ 906 0202 1F48     		ldr	r0, .L32+32
+ 907 0204 05FB00F0 		mul	r0, r5, r0
+ 908 0208 FFF7FEFF 		bl	__aeabi_i2d
+ 909              	.LVL75:
+ 910 020c 0022     		movs	r2, #0
+ 911 020e 194B     		ldr	r3, .L32+20
+ 912 0210 FFF7FEFF 		bl	__aeabi_dmul
+ 913              	.LVL76:
+ 914              		.loc 1 85 13 view .LVU207
+ 915 0214 FFF7FEFF 		bl	__aeabi_d2iz
+ 916              	.LVL77:
+ 917 0218 1390     		str	r0, [sp, #76]
+  86:Core/Src/bmp180.c ****     Data.Pressure = Data.Pressure + (Data.X1 + Data.X2 + 3791)/(pow(2,4));
+ 918              		.loc 1 86 5 is_stmt 1 view .LVU208
+ 919              		.loc 1 86 46 is_stmt 0 view .LVU209
+ 920 021a 2044     		add	r0, r0, r4
+ 921              		.loc 1 86 63 view .LVU210
+ 922 021c 00F6CF60 		addw	r0, r0, #3791
+ 923 0220 FFF7FEFF 		bl	__aeabi_i2d
+ 924              	.LVL78:
+ 925 0224 0022     		movs	r2, #0
+ 926 0226 174B     		ldr	r3, .L32+36
+ 927 0228 FFF7FEFF 		bl	__aeabi_dmul
+ 928              	.LVL79:
+ 929 022c 0246     		mov	r2, r0
+ 930 022e 0B46     		mov	r3, r1
+ 931              		.loc 1 86 35 view .LVU211
+ 932 0230 3046     		mov	r0, r6
+ 933 0232 3946     		mov	r1, r7
+ 934 0234 FFF7FEFF 		bl	__aeabi_dadd
+ 935              	.LVL80:
+ 936              		.loc 1 86 19 view .LVU212
+ 937 0238 FFF7FEFF 		bl	__aeabi_d2iz
+ 938              	.LVL81:
+ 939 023c 1A90     		str	r0, [sp, #104]
+  87:Core/Src/bmp180.c ****     return Data.Pressure;
+ 940              		.loc 1 87 5 is_stmt 1 view .LVU213
+  88:Core/Src/bmp180.c **** }
+ 941              		.loc 1 88 1 is_stmt 0 view .LVU214
+ 942 023e 07EE900A 		vmov	s15, r0	@ int
+ 943 0242 B8EEE70A 		vcvt.f32.s32	s0, s15
+ 944 0246 BDEC028B 		vldm	sp!, {d8}
+ 945              	.LCFI24:
+ 946              		.cfi_remember_state
+ 947              		.cfi_restore 80
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 19
+
+
+ 948              		.cfi_restore 81
+ 949              		.cfi_def_cfa_offset 48
+ 950 024a BDE8F047 		pop	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 951              	.LCFI25:
+ 952              		.cfi_restore 14
+ 953              		.cfi_restore 10
+ 954              		.cfi_restore 9
+ 955              		.cfi_restore 8
+ 956              		.cfi_restore 7
+ 957              		.cfi_restore 6
+ 958              		.cfi_restore 5
+ 959              		.cfi_restore 4
+ 960              		.cfi_def_cfa_offset 16
+ 961 024e 04B0     		add	sp, sp, #16
+ 962              	.LCFI26:
+ 963              		.cfi_def_cfa_offset 0
+ 964 0250 7047     		bx	lr
+ 965              	.L31:
+ 966              	.LCFI27:
+ 967              		.cfi_restore_state
+  75:Core/Src/bmp180.c ****     Data.X1 = Data.AC3 * Data.B6/pow(2,13);
+ 968              		.loc 1 75 53 view .LVU215
+ 969 0252 0334     		adds	r4, r4, #3
+ 970 0254 58E7     		b	.L27
+ 971              	.L28:
+  82:Core/Src/bmp180.c ****     Data.X1 = pow((Data.Pressure/(pow(2,8))),(Data.Pressure/(pow(2,8))));
+ 972              		.loc 1 82 10 is_stmt 1 view .LVU216
+  82:Core/Src/bmp180.c ****     Data.X1 = pow((Data.Pressure/(pow(2,8))),(Data.Pressure/(pow(2,8))));
+ 973              		.loc 1 82 35 is_stmt 0 view .LVU217
+ 974 0256 B5FBF0F5 		udiv	r5, r5, r0
+  82:Core/Src/bmp180.c ****     Data.X1 = pow((Data.Pressure/(pow(2,8))),(Data.Pressure/(pow(2,8))));
+ 975              		.loc 1 82 45 view .LVU218
+ 976 025a 6D00     		lsls	r5, r5, #1
+  82:Core/Src/bmp180.c ****     Data.X1 = pow((Data.Pressure/(pow(2,8))),(Data.Pressure/(pow(2,8))));
+ 977              		.loc 1 82 24 view .LVU219
+ 978 025c 1A95     		str	r5, [sp, #104]
+ 979 025e ABE7     		b	.L29
+ 980              	.L33:
+ 981              		.align	3
+ 982              	.L32:
+ 983 0260 00000000 		.word	0
+ 984 0264 00000040 		.word	1073741824
+ 985 0268 0000A040 		.word	1084227584
+ 986 026c 0000303F 		.word	1060110336
+ 987 0270 0000203F 		.word	1059061760
+ 988 0274 0000F03E 		.word	1055916032
+ 989 0278 0000D03F 		.word	1070596096
+ 990 027c 0000703F 		.word	1064304640
+ 991 0280 43E3FFFF 		.word	-7357
+ 992 0284 0000B03F 		.word	1068498944
+ 993              		.cfi_endproc
+ 994              	.LFE134:
+ 996              		.global	__aeabi_f2d
+ 997              		.global	__aeabi_dsub
+ 998              		.section	.text.BMP180_Altitude,"ax",%progbits
+ 999              		.align	1
+ 1000              		.global	BMP180_Altitude
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 20
+
+
+ 1001              		.syntax unified
+ 1002              		.thumb
+ 1003              		.thumb_func
+ 1005              	BMP180_Altitude:
+ 1006              	.LVL82:
+ 1007              	.LFB135:
+  89:Core/Src/bmp180.c **** 
+  90:Core/Src/bmp180.c **** float BMP180_Altitude(bmp180_t Data, int oss)
+  91:Core/Src/bmp180.c **** {
+ 1008              		.loc 1 91 1 is_stmt 1 view -0
+ 1009              		.cfi_startproc
+ 1010              		@ args = 80, pretend = 16, frame = 0
+ 1011              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1012              		.loc 1 91 1 is_stmt 0 view .LVU221
+ 1013 0000 84B0     		sub	sp, sp, #16
+ 1014              	.LCFI28:
+ 1015              		.cfi_def_cfa_offset 16
+ 1016 0002 00B5     		push	{lr}
+ 1017              	.LCFI29:
+ 1018              		.cfi_def_cfa_offset 20
+ 1019              		.cfi_offset 14, -20
+ 1020 0004 91B0     		sub	sp, sp, #68
+ 1021              	.LCFI30:
+ 1022              		.cfi_def_cfa_offset 88
+ 1023 0006 0DF1480C 		add	ip, sp, #72
+ 1024 000a 8CE80F00 		stm	ip, {r0, r1, r2, r3}
+  92:Core/Src/bmp180.c ****     BMP180_Pressure(Data,oss);
+ 1025              		.loc 1 92 5 is_stmt 1 view .LVU222
+ 1026 000e 259B     		ldr	r3, [sp, #148]
+ 1027 0010 0F93     		str	r3, [sp, #60]
+ 1028 0012 EC46     		mov	ip, sp
+ 1029 0014 0DF1580E 		add	lr, sp, #88
+ 1030 0018 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 1031 001c ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 1032 0020 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 1033 0024 ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 1034 0028 BEE80F00 		ldmia	lr!, {r0, r1, r2, r3}
+ 1035 002c ACE80F00 		stmia	ip!, {r0, r1, r2, r3}
+ 1036 0030 9EE80700 		ldm	lr, {r0, r1, r2}
+ 1037 0034 8CE80700 		stm	ip, {r0, r1, r2}
+ 1038 0038 12AB     		add	r3, sp, #72
+ 1039 003a 0FCB     		ldm	r3, {r0, r1, r2, r3}
+ 1040 003c FFF7FEFF 		bl	BMP180_Pressure
+ 1041              	.LVL83:
+  93:Core/Src/bmp180.c ****     Data.Altitude = 44330*(1-(pow((Data.Pressure/(float)atm_Pressure),0.19029495718)));
+ 1042              		.loc 1 93 5 view .LVU223
+ 1043              		.loc 1 93 49 is_stmt 0 view .LVU224
+ 1044 0040 DDED227A 		vldr.32	s15, [sp, #136]	@ int
+ 1045 0044 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 1046              		.loc 1 93 31 view .LVU225
+ 1047 0048 9FED177A 		vldr.32	s14, .L36+16
+ 1048 004c C7EE877A 		vdiv.f32	s15, s15, s14
+ 1049 0050 17EE900A 		vmov	r0, s15
+ 1050 0054 FFF7FEFF 		bl	__aeabi_f2d
+ 1051              	.LVL84:
+ 1052 0058 9FED0F1B 		vldr.64	d1, .L36
+ 1053 005c 41EC100B 		vmov	d0, r0, r1
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 21
+
+
+ 1054 0060 FFF7FEFF 		bl	pow
+ 1055              	.LVL85:
+ 1056 0064 53EC102B 		vmov	r2, r3, d0
+ 1057              		.loc 1 93 29 view .LVU226
+ 1058 0068 0020     		movs	r0, #0
+ 1059 006a 1049     		ldr	r1, .L36+20
+ 1060 006c FFF7FEFF 		bl	__aeabi_dsub
+ 1061              	.LVL86:
+ 1062              		.loc 1 93 26 view .LVU227
+ 1063 0070 0BA3     		adr	r3, .L36+8
+ 1064 0072 D3E90023 		ldrd	r2, [r3]
+ 1065 0076 FFF7FEFF 		bl	__aeabi_dmul
+ 1066              	.LVL87:
+ 1067              		.loc 1 93 19 view .LVU228
+ 1068 007a FFF7FEFF 		bl	__aeabi_d2iz
+ 1069              	.LVL88:
+ 1070 007e 2490     		str	r0, [sp, #144]
+  94:Core/Src/bmp180.c ****     return Data.Altitude;
+ 1071              		.loc 1 94 5 is_stmt 1 view .LVU229
+  95:Core/Src/bmp180.c **** }...
+ 1072              		.loc 1 95 1 is_stmt 0 view .LVU230
+ 1073 0080 07EE900A 		vmov	s15, r0	@ int
+ 1074 0084 B8EEE70A 		vcvt.f32.s32	s0, s15
+ 1075 0088 11B0     		add	sp, sp, #68
+ 1076              	.LCFI31:
+ 1077              		.cfi_def_cfa_offset 20
+ 1078              		@ sp needed
+ 1079 008a 5DF804EB 		ldr	lr, [sp], #4
+ 1080              	.LCFI32:
+ 1081              		.cfi_restore 14
+ 1082              		.cfi_def_cfa_offset 16
+ 1083 008e 04B0     		add	sp, sp, #16
+ 1084              	.LCFI33:
+ 1085              		.cfi_def_cfa_offset 0
+ 1086 0090 7047     		bx	lr
+ 1087              	.L37:
+ 1088 0092 00BFAFF3 		.align	3
+ 1088      0080
+ 1089              	.L36:
+ 1090 0098 E445D7CC 		.word	-858307100
+ 1091 009c 955BC83F 		.word	1070095253
+ 1092 00a0 00000000 		.word	0
+ 1093 00a4 40A5E540 		.word	1088791872
+ 1094 00a8 ECB17C44 		.word	1149022700
+ 1095 00ac 0000F03F 		.word	1072693248
+ 1096              		.cfi_endproc
+ 1097              	.LFE135:
+ 1099              		.section	.rodata
+ 1100              		.align	2
+ 1101              		.set	.LANCHOR0,. + 0
+ 1102              	.LC0:
+ 1103 0000 0000     		.ascii	"\000\000"
+ 1104 0002 00       		.space	1
+ 1105              		.text
+ 1106              	.Letext0:
+ 1107              		.file 2 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\12.2 mpacbti-rel1\\arm-none-eab
+ 1108              		.file 3 "c:\\program files (x86)\\arm gnu toolchain arm-none-eabi\\12.2 mpacbti-rel1\\arm-none-eab
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 22
+
+
+ 1109              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ 1110              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1111              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1112              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_i2c.h"
+ 1113              		.file 8 "Core/Inc/bmp180.h"
+ 1114              		.file 9 "<built-in>"
+ 1115              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ARM GAS  C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 bmp180.c
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:21     .text.BMP180_Init:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:27     .text.BMP180_Init:00000000 BMP180_Init
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:184    .text.BMP180_Init:000000f4 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:189    .text.Read_UT:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:195    .text.Read_UT:00000000 Read_UT
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:281    .text.Read_UT:0000006c $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:291    .text.BMP180_Temperature:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:297    .text.BMP180_Temperature:00000000 BMP180_Temperature
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:438    .text.BMP180_Temperature:000000d4 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:445    .text.Read_UP:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:451    .text.Read_UP:00000000 Read_UP
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:502    .text.Read_UP:00000040 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:506    .text.Read_UP:00000044 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:570    .text.Read_UP:00000098 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:579    .text.BMP180_Pressure:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:585    .text.BMP180_Pressure:00000000 BMP180_Pressure
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:983    .text.BMP180_Pressure:00000260 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:999    .text.BMP180_Altitude:00000000 $t
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:1005   .text.BMP180_Altitude:00000000 BMP180_Altitude
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:1090   .text.BMP180_Altitude:00000098 $d
+C:\Users\pc\AppData\Local\Temp\ccuOAaxe.s:1100   .rodata:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Mem_Read
+hi2c1
+HAL_I2C_Mem_Write
+HAL_Delay
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_d2iz
+__aeabi_ddiv
+__aeabi_d2f
+__aeabi_ui2d
+__aeabi_d2uiz
+__aeabi_dadd
+pow
+__aeabi_f2d
+__aeabi_dsub

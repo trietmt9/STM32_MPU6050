@@ -2,15 +2,6 @@
 
 extern I2C_HandleTypeDef hi2c1;
 
-kalman_t KalmanX = {
-    .R = 1,
-    .Q = 0.01
-};
-
-kalman_t KalmanY = {
-    .R = 1,
-    .Q = 0.01
-};
 
 void MPU6050_Init()
 {
@@ -58,25 +49,4 @@ void MPU6050_Read(mpu6050_t *Data)
 
     Data->Roll = atan(Data->Ax/(sqrt(pow(Data->Ay,2)+pow(Data->Az,2))))*RAD2DEG;
     Data->Pitch = atan((-1*Data->Ay)/(sqrt( pow(Data->Ax,2) + pow(Data->Az,2) )))*RAD2DEG;
-
-    Data->KalmanPitch = KalmanFilter(&KalmanY, Data->Gy, Data->Pitch);
-    Data->KalmanRoll = KalmanFilter(&KalmanX, Data->Gx,Data->Roll);
-}
-
-
-
-
-float KalmanFilter(kalman_t *KalmanAngle, float Rate, float Angle )
-{
-    KalmanAngle->x = KalmanAngle->x + Rate; 
-    KalmanAngle->P = KalmanAngle->P + KalmanAngle->Q;
-
-    float RP = KalmanAngle->P + KalmanAngle->R;
-
-    KalmanAngle->Kalman = KalmanAngle->P/RP;
-
-    KalmanAngle->angle = KalmanAngle->angle + KalmanAngle->Kalman*( Angle - KalmanAngle->x);
-
-    KalmanAngle->P = (1-KalmanAngle->Kalman) * KalmanAngle->P;
-    
 }
